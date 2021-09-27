@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\Hankaku;
 use App\Rules\Gender;
+use App\Mail\RegisteredMail;
 
 
 class RegisterController extends Controller
@@ -150,6 +151,7 @@ class RegisterController extends Controller
 
         // 登録データーでログイン
         $this->guard()->login($user, true);
+        \Mail::to($user)->send(new RegisteredMail($user));
 
         return $this->registered($request, $user)
             ?  : redirect($this->redirectPath());

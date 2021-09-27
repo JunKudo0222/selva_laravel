@@ -8,6 +8,6 @@
 
 
     <a class="navbar-brand" href="{{ url('/') }}">
-                    トップページ
+                    トップに戻る
                 </a>
 </div>
