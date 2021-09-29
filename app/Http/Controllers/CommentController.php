@@ -3,20 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Http\Requests\CommentRequest;
+use App\Comment;
+use App\Post;
 use Auth;
 
-
-class UsersController extends Controller
+class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(){
-        $this->middleware('auth', ['except' => 'destroy']);
-    }
     public function index()
     {
         //
@@ -38,9 +40,21 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        $post = Post::find($request->post_id);  //まず該当の投稿を探す
+        $comment = new Comment;              //commentのインスタンスを作成
+        $comment -> body    = $request -> body;
+        $comment -> user_id = Auth::id();
+        $comment -> post_id = $request -> post_id;
+        $comment -> save();
+        $comments=$post->comments;
+        $id=$post->id;
+
+        return redirect()->route('posts.show',[
+            'post_id' => $id,
+        ]);
+        // return view('posts.show', compact('post','comments'));  //リターン先は該当の投稿詳細ページ
     }
 
     /**
@@ -49,11 +63,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $id=Auth::id();
-        $user=User::find($id);
-        return view('users.mypage',compact('user'));
+        //
     }
 
     /**
@@ -87,24 +99,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        if($id==Auth::id()){
-
-            $user->delete();
-            return redirect('/');
-        }
-        else{
-            $user->delete();
-            return redirect()->route('users.userlist');
-        }
-
-    }
-    
-    public function delete_confirm()
-    {
-        
-        
-        return view('users.delete_confirm');
+        //
     }
 }
-

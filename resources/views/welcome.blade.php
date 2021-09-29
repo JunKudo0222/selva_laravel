@@ -104,7 +104,16 @@
                     @endauth
                 </div>    
                 <div class="top-right links parent">
+                                    <a  href="{{ route('posts.index') }}">
+                                        商品一覧
+                                    </a>
                     @auth
+                                    <a  href="{{ route('posts.create') }}">
+                                        新規商品登録
+                                    </a>
+                                    <a  href="{{ route('users.show',Auth::user()->id )}}">
+                                        マイページ
+                                    </a>
                                     <a  href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

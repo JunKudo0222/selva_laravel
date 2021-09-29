@@ -43,5 +43,43 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
-Route::resource('users','UsersController',['only'=>['destroy']]);
+// 一覧
+Route::get('/users', 'UsersController@index')->name('users.index');
+// 保存
+Route::post('/users', 'UsersController@store')->name('users.store');
+// 作成
+Route::get('/users/{user_id}', 'UsersController@show')->name('users.show');
+// 編集
+Route::get('/edit/{user_id}', 'UsersController@edit')->name('users.edit');
+// 更新
+Route::put('/{user_id}', 'UsersController@update')->name('users.update');
+// 削除
+Route::delete('/{user_id}', 'UsersController@destroy')->name('users.destroy');
 Route::get('php/member_withdrawal.php','UsersController@delete_confirm')->name('users.delete_confirm');
+
+
+
+
+Route::get('/search', 'PostController@search')->name('posts.search');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/create', 'PostController@create')->name('posts.create');
+    Route::post('/confirm', 'PostController@confirm')->name('posts.confirm');
+});
+// 一覧
+Route::get('/posts', 'PostController@index')->name('posts.index');
+// 保存
+Route::post('/posts', 'PostController@store')->name('posts.store');
+// 作成
+Route::get('/posts/{post_id}', 'PostController@show')->name('posts.show');
+// 編集
+Route::get('/edit/{post_id}', 'PostController@edit')->name('posts.edit');
+// 更新
+Route::put('/{post_id}', 'PostController@update')->name('posts.update');
+// 削除
+Route::delete('/{post_id}', 'PostController@destroy')->name('posts.destroy');
+
+
+
+
+
+Route::resource('comments', 'CommentController');
