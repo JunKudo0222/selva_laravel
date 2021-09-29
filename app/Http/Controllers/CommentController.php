@@ -19,9 +19,13 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $post=Post::find($request->id);
+        $comments=$post->load('comments');
+        $comments=$comments['comments'];
+        
+        return view('comments.index',compact('comments','post'));
     }
 
     /**
@@ -29,9 +33,12 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
+        $id=(int)$request->id;
+        $post=Post::find($id);
+        return view('comments.create',compact('id','post'));
     }
 
     /**

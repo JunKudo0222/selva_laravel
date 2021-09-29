@@ -1,4 +1,11 @@
-<style>
+
+
+
+
+
+
+
+    <style>
     .pager{
         margin-left: auto;
     margin-right: auto;
@@ -18,7 +25,7 @@
 <div class="topbutton">
     <a class="btn btn-primary" href="/">トップに戻る</a>
 </div>
-<h1>商品詳細</h1>
+<h1>商品レビュー一覧</h1>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -47,7 +54,19 @@
     
 
 
-    <a href="{{route('comments.index',['id'=>$post->id])}}">>>レビューを見る</a><br><br>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            @foreach ($comments as $index=>$comment)
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="cname">投稿日時：{{ $comment->created_at->format('Y.m.d H:i') }}</h5>
+                    <p class="card-text">内容：{{ $comment->body }}</p>
+                </div>
+            </div>
+            
+            @endforeach
+        </div>
+    </div>
 
 
 
@@ -59,8 +78,7 @@
     @if( Auth::check() )
     <div class="row justify-content-center">
         <div class="col-md-8">
-        <a class="btn btn-primary" href="{{route('comments.create',['id'=>$post->id])}}">この商品についてのレビューを登録</a><br><br>
-        <a class="btn btn-primary" href="{{route('posts.index')}}">商品一覧に戻る</a>
+        <a class="btn btn-primary" href="{{route('posts.show',$post->id)}}">商品詳細に戻る</a>
         </div>
     </div>
     @endif

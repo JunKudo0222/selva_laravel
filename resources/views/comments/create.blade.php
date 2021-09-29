@@ -1,4 +1,16 @@
-<style>
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
     .pager{
         margin-left: auto;
     margin-right: auto;
@@ -18,7 +30,7 @@
 <div class="topbutton">
     <a class="btn btn-primary" href="/">トップに戻る</a>
 </div>
-<h1>商品詳細</h1>
+<h1>商品レビュー一覧</h1>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -47,7 +59,20 @@
     
 
 
-    <a href="{{route('comments.index',['id'=>$post->id])}}">>>レビューを見る</a><br><br>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form action="{{ route('comments.store') }}" method="POST">
+            {{csrf_field()}}
+        <input type="hidden" name="post_id" value="{{$id}}">
+                <div class="form-group">
+                    <label>コメント</label>
+                    <textarea class="form-control" 
+                     placeholder="内容" rows="5" name="body"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">コメントする</button>
+            </form>
+        </div>
+    </div>
 
 
 
@@ -59,8 +84,7 @@
     @if( Auth::check() )
     <div class="row justify-content-center">
         <div class="col-md-8">
-        <a class="btn btn-primary" href="{{route('comments.create',['id'=>$post->id])}}">この商品についてのレビューを登録</a><br><br>
-        <a class="btn btn-primary" href="{{route('posts.index')}}">商品一覧に戻る</a>
+        <a class="btn btn-primary" href="{{route('posts.show',$post->id)}}">商品詳細に戻る</a>
         </div>
     </div>
     @endif
