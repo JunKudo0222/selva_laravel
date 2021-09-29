@@ -49,6 +49,16 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request)
     {
+        $request->session()->regenerateToken();
+        $input = $request->only('body');
+        $request->session()->put("form_input", $input);
+        //セッションから値を取り出す
+        $input = $request->session()->get("form_input");
+        if ($request->has("back")) {
+            // dd($input);
+            // dd($request);
+            return redirect()->route('comments.create')->withInput($input);
+        }
         $post = Post::find($request->post_id);  //まず該当の投稿を探す
         $comment = new Comment;              //commentのインスタンスを作成
         $comment -> body    = $request -> body;
@@ -107,5 +117,15 @@ class CommentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function confirm(CommentRequest $request)
+    {   $post=Post::find($request->post_id);
+        $comment = new Comment; //インスタンスを作成
+        $comment -> body    = $request -> body; //ユーザー入力のnameを代入
+        $comment -> user_id  = Auth::id(); //ログイン中のユーザーidを代入
+        $comment -> post_id  = $request->post_id; //ログイン中のユーザーidを代入
+
+        return view('comments.confirm',compact('comment','post'));
     }
 }

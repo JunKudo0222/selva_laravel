@@ -56,24 +56,21 @@
 
 
 
-    
-
-
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <form action="{{ route('comments.confirm') }}" method="POST">
-            {{csrf_field()}}
-        <input type="hidden" name="post_id" value="{{$id}}">
-                <div class="form-group">
-                    <label>コメント</label>
-                    <textarea class="form-control" 
-                     placeholder="内容" rows="5" name="body" value="{{old('body')}}"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">コメントする</button>
-            </form>
+    <form action="{{ route('comments.store') }}" method="POST">
+{{csrf_field()}}
+        
+        <div class="md-form">
+            <label for="body">商品評価</label>
+            {{ $comment->body }}
+            <input class="form-control" type="hidden" id="body" name="body" required value="{{ $comment->body }}">
+            <input class="form-control" type="hidden" id="post_id" name="post_id" required value="{{ $post->id }}">
         </div>
-    </div>
+        <button type="submit" class="btn btn-primary">登録する</button><br><br>
+        <button type="submit" class="btn btn-primary" name="back">前に戻る</button>
+</form>
 
+
+    
 
 
 
