@@ -36,6 +36,11 @@
 <h1 class="detailbar"> 会員詳細</h1>
     <div class="right">
         <a href="/" class="btn btn-primary">トップへ戻る</a>
+        <a href="{{ route('logout') }}" class="btn btn-primary"
+        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+        ログアウト
+        </a>
     </div>
 </div>
 @section('content')

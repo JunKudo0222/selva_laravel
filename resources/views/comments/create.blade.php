@@ -65,7 +65,28 @@
             {{csrf_field()}}
         <input type="hidden" name="post_id" value="{{$id}}">
                 <div class="form-group">
-                    <label>コメント</label>
+
+                    <label>商品評価</label>
+                    <div class="is-invalid">
+                            <select class="form-control" id="exampleFormControlSelect1" name="evaluation" class="is-invalid">
+                                
+                                
+                                @if(old('evaluation')==!null&&1<=old('evaluation')&&old('evaluation')<=5)
+                                
+                                <option value="{{old('evaluation')}}" selected>{{$evaluation->find(old('evaluation'))->name}}</option>
+                                
+                                @else
+                                <option value="" selected>選択してください</option>
+                                @endif
+                             
+                            <option value="1" >1</option>
+                            <option value="2" >2</option>
+                            <option value="3" >3</option>
+                            <option value="4" >4</option>
+                            <option value="5" >5</option>
+                            </select>
+                          </div>
+                    <label>商品コメント</label>
                     <textarea class="form-control" 
                      placeholder="内容" rows="5" name="body" value="{{old('body')}}"></textarea>
                 </div>

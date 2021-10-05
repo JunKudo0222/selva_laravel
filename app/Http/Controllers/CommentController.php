@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
 use App\Comment;
 use App\Post;
+use App\User;
 use Auth;
 
 class CommentController extends Controller
@@ -21,11 +22,12 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
+        $user=User::all();
         $post=Post::find($request->id);
         $comments=$post->load('comments');
         $comments=$comments['comments'];
         
-        return view('comments.index',compact('comments','post'));
+        return view('comments.index',compact('comments','post','user'));
     }
 
     /**
@@ -49,14 +51,17 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request)
     {
+        
         $request->session()->regenerateToken();
-        $input = $request->only('body');
+        $input = $request->only('body','evaluation');
         $request->session()->put("form_input", $input);
         //セッションから値を取り出す
         $input = $request->session()->get("form_input");
         if ($request->has("back")) {
             // dd($input);
             // dd($request);
+            
+            
             return redirect()->route('comments.create')->withInput($input);
         }
         $post = Post::find($request->post_id);  //まず該当の投稿を探す
@@ -64,6 +69,7 @@ class CommentController extends Controller
         $comment -> body    = $request -> body;
         $comment -> user_id = Auth::id();
         $comment -> post_id = $request -> post_id;
+        $comment -> evaluation = $request -> evaluation;
         $comment -> save();
         $comments=$post->comments;
         $id=$post->id;
@@ -120,12 +126,14 @@ class CommentController extends Controller
     }
 
     public function confirm(CommentRequest $request)
-    {   $post=Post::find($request->post_id);
+    {   
+        $post=Post::find($request->post_id);
         $comment = new Comment; //インスタンスを作成
         $comment -> body    = $request -> body; //ユーザー入力のnameを代入
         $comment -> user_id  = Auth::id(); //ログイン中のユーザーidを代入
         $comment -> post_id  = $request->post_id; //ログイン中のユーザーidを代入
-
+        $comment -> evaluation  = $request->evaluation; //ログイン中のユーザーidを代入
+        
         return view('comments.confirm',compact('comment','post'));
     }
 }

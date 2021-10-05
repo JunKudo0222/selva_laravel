@@ -10,6 +10,13 @@
         width:20%;
 
     }
+    .hidden{
+        display:none;
+    }
+    .thumbnail{
+        width:100px;
+        height:100px;
+    }
 </style>
 
 
@@ -23,13 +30,21 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card-header">
-                <h5>{{ $post->name }}</h5><br>
-                <a>{{ $post->comments->count() }}コメント {{ $post->created_at->format('n/j/y H:i') }}</a>
+            {{$product_category->find($post->product_category)->name}}>{{$product_subcategory->find($post->product_subcategory)->name}}<br>
+                <h5>{{ $post->name }}</h5>
+                <a>更新日時:{{ $post->created_at->format('n/j/y H:i') }}</a>
             </div>
             
             <div class="card-body">
-                <p class="card-text">{{ $post->created_at->format('Y.m.d H:i') }}</p>
-                <p class="card-text">{{ $post->body }}</p>
+                @isset($post->image1)
+                <img class="thumbnail" src="{{ url($post->image1) }}">
+                <img class="thumbnail" src="{{ url($post->image2) }}">
+                <img class="thumbnail" src="{{ url($post->image3) }}">
+                <img class="thumbnail" src="{{ url($post->image4) }}">
+                @endisset
+                <p class="card-text">■商品説明<br>{{ $post->product_content }}</p>
+                <p class="card-text">■商品レビュー<br>総合評価 @for($i = 0; $i < ceil($comments->where('post_id',$post->id)->avg('evaluation')); $i++)<div class="hidden">{{$i}}</div>★@endfor
+                            {{ceil($comments->where('post_id',$post->id)->avg('evaluation'))}}</p>
                 <!-- @if($post->user_id===Auth::id())
                 <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">編集する</a>
                 <form action='{{ route('posts.destroy', $post->id) }}' method='post'>

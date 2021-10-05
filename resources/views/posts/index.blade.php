@@ -11,7 +11,13 @@
     .left{
         float:left;
     }
-    
+    .hidden{
+        display:none;
+    }
+    .thumbnail{
+        width:100px;
+        height:100px;
+    }
 </style>
 @auth
 <div class="topbar">
@@ -55,13 +61,20 @@
 
             @foreach ($posts as $post)
                 <div class="card-body">
-                    <h5 class="card-title left">
-                        ID:{{$post->id}}
+                    @isset($post->image1)
+                    <img class="thumbnail" src="{{ url($post->image1) }}">
+                    @endisset
+                    <h5 class="card-title">
+                        
 
-                        <a href="{{ route('posts.show', $post->id) }}" >
-                            {{ $post->name }}
-                        </a>
-                        {{ $post->created_at->format('Y.m.d H:i') }}
+                        
+                            {{$product_category->find($post->product_category)->name}}>{{$product_subcategory->find($post->product_subcategory)->name}}<br>
+                            {{ $post->name }}<br>
+                            @for($i = 0; $i < ceil($comments->where('post_id',$post->id)->avg('evaluation')); $i++)<div class="hidden">{{$i}}</div>★@endfor
+                            {{ceil($comments->where('post_id',$post->id)->avg('evaluation'))}}
+                            
+                        
+                        <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">詳細</a>
                     </h5>
 
                 </div>

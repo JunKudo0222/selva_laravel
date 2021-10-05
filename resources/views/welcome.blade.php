@@ -154,12 +154,5 @@
             </div>
             
         </div>
-        <footer>
-        
-            @auth
-            <a href="{{route('users.delete_confirm')}}" class="right">退会</a>
-            @endauth
-        
-        </footer>
     </body>
 </html>

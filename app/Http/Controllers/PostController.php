@@ -7,6 +7,7 @@ use App\Http\Requests\PostRequest;
 use App\Product_category;
 use App\Product_subcategory;
 use App\Post;
+use App\Comment;
 use Auth;
 
 class PostController extends Controller
@@ -18,8 +19,11 @@ class PostController extends Controller
      */
     public function index()
     {
+        $product_category=Product_category::all();
+        $product_subcategory=Product_subcategory::all();
         $posts=Post::all();
-        return view('posts.index',compact('posts'));
+        $comments=Comment::all();
+        return view('posts.index',compact('posts','comments','product_category','product_subcategory'));
     }
 
     /**
@@ -31,7 +35,35 @@ class PostController extends Controller
     {
         $product_categories=Product_category::all();
         $product_subcategories=Product_subcategory::all();
+        
         return view('posts.create',compact('product_categories','product_subcategories'));
+    }
+
+    public function test(Request $request){
+
+        
+        
+        //アップロードパスを指定する。(/storage/upload)
+        // $upload_file_path = storage_path().'/upload/';
+        $upload_file_path = storage_path().'/app/public/';
+        
+        // アップロードファイルを受け取る。
+        $result = $request->file('file1')->isValid();  
+        if($result){  
+            
+            //ファイルを格納する。
+            $request->file('file1')->move($upload_file_path ,"image1.jpeg");
+            $request->file('file2')->move($upload_file_path ,"image2.jpeg");
+            $request->file('file3')->move($upload_file_path ,"image3.jpeg");
+            $request->file('file4')->move($upload_file_path ,"image4.jpeg");
+            
+        }
+        
+        
+        
+        //テキストの内容を付与してhtml(test.blade.php)を返却する。
+        return view('image');
+        
     }
 
     /**
@@ -54,12 +86,24 @@ class PostController extends Controller
             return redirect()->route('posts.create')->withInput($input);
         }
         $post = new Post; //インスタンスを作成
+        
         $post -> name    = $request -> name; //ユーザー入力のnameを代入
         $post -> product_category    = $request -> product_category; //ユーザー入力のnameを代入
         $post -> product_subcategory    = $request -> product_subcategory; //ユーザー入力のnameを代入
         $post -> product_content     = $request -> product_content; //ユーザー入力のproduct_contentを代入
         $post -> user_id  = Auth::id(); //ログイン中のユーザーidを代入
         $post -> save(); //保存してあげましょう
+        $post -> image1    = "storage/".$post->id."image1.jpeg";
+        $post -> image2    = "storage/".$post->id."image2.jpeg";
+        $post -> image3    = "storage/".$post->id."image3.jpeg";
+        $post -> image4    = "storage/".$post->id."image4.jpeg";
+        
+        $post -> save(); //保存してあげましょう
+        rename('storage/image1.jpeg', $post->image1);
+        rename('storage/image2.jpeg', $post->image2);
+        rename('storage/image3.jpeg', $post->image3);
+        rename('storage/image4.jpeg', $post->image4);
+
         
         return redirect()->route('posts.index');
     }
@@ -72,6 +116,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
+        $product_category=Product_category::all();
+        $product_subcategory=Product_subcategory::all();
         $post = Post::find($id);
         $post->load('comments');
         
@@ -81,7 +127,7 @@ class PostController extends Controller
             // ->paginate(5);
             
             
-            return view('posts.show', compact('post','comments'));
+            return view('posts.show', compact('post','comments','product_category','product_subcategory'));
     }
 
     /**
@@ -122,6 +168,10 @@ class PostController extends Controller
     {
         $post = new Post; //インスタンスを作成
         $post -> name    = $request -> name; //ユーザー入力のnameを代入
+        $post -> image1    = $request -> image1; //ユーザー入力のimage1を代入
+        $post -> image2    = $request -> image2; //ユーザー入力のimage2を代入
+        $post -> image3    = $request -> image3; //ユーザー入力のimage3を代入
+        $post -> image4    = $request -> image4; //ユーザー入力のimage4を代入
         $post -> product_category    = $request -> product_category; //ユーザー入力のnameを代入
         $post -> product_subcategory    = $request -> product_subcategory; //ユーザー入力のnameを代入
         $post -> product_content     = $request -> product_content; //ユーザー入力のproduct_contentを代入

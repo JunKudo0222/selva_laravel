@@ -11,6 +11,18 @@
 |
 */
 
+// //入力フォーム画面を表示する。
+// Route::get('/', function () {
+//     return view('test');
+// });
+ 
+// //ajax通信をポストで受け取った際に処理を実行する。
+// Route::post('/test', 'TestController@test');
+
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -62,8 +74,10 @@ Route::get('php/member_withdrawal.php','UsersController@delete_confirm')->name('
 
 Route::get('/search', 'PostController@search')->name('posts.search');
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/create', 'PostController@create')->name('posts.create');
     Route::post('/confirm', 'PostController@confirm')->name('posts.confirm');
+    Route::get('/create', 'PostController@create')->name('posts.create');
+    //ajax通信をポストで受け取った際に処理を実行する。
+    Route::post('/create/create', 'PostController@test')->name('posts.test');
 });
 // 一覧
 Route::get('/posts', 'PostController@index')->name('posts.index');

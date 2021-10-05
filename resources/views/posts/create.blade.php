@@ -1,4 +1,11 @@
 @extends('layouts.app')
+<style>
+    .thumbnail{
+        width:100px;
+        height:100px;
+    }
+    
+</style>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -20,75 +27,87 @@
                     <input type="text" class="form-control" value="{{old('name')}}" name="name" >
                 </div>
                 
+                <!DOCTYPE html>
+<head>
+                            <title>test</title>
+                            <meta name="csrf-token" content="{{ csrf_token() }}">
+                        </head>
+                        <body>
+
+
+
+
+
+<div class="form-group">
+          <label for="exampleFormControlSelect1">商品大カテゴリー</label>
+          <div class="is-invalid">
+            <select class="form-control parent" id="exampleFormControlSelect1" name="product_category" class="is-invalid" onchange="change();">
                 
-                <div class="form-group">
-                          <label for="exampleFormControlSelect1">商品大カテゴリー</label>
-                          <div class="is-invalid">
-                            <select class="form-control" id="exampleFormControlSelect1" name="product_category" class="is-invalid">
-                                
-                                
-                                @if(old('product_category')==!null&&1<=old('product_category')&&old('product_category')<=5)
-                                
-                                <option value="{{old('product_category')}}" selected>{{$product_categories->find(old('product_category'))->name}}</option>
-                                
-                                @else
-                                <option value="" selected>選択してください</option>
-                                @endif
-                             @foreach($product_categories as $product_category)
-                            <option value="{{ $product_category -> id }}" class="@error('product_category') is-invalid @enderror">{{ $product_category -> name }}</option>
-                            @endforeach
-                            
-                            
-                            
-                            </select>
-                            @error('product_category')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                          </div>
-                        </div>
                 
-                <div class="form-group">
-                          <label for="exampleFormControlSelect1">商品小カテゴリー</label>
-                          <div class="is-invalid">
-                            <select class="form-control" id="exampleFormControlSelect1" name="product_subcategory" class="is-invalid">
-                                
-                                
-                                @if(old('product_subcategory')==!null&&1<=old('product_subcategory')&&old('product_subcategory')<=25)
-                                
-                                <option value="{{old('product_subcategory')}}" selected>{{$product_subcategories->find(old('product_subcategory'))->name}}</option>
-                                
-                                @else
-                                <option value="" selected>選択してください</option>
-                                @endif
-                             @foreach($product_subcategories as $product_subcategory)
-                            <option value="{{ $product_subcategory -> id }}" class="@error('product_subcategory') is-invalid @enderror">{{ $product_subcategory -> name }}</option>
-                            @endforeach
+                @if(old('product_category')==!null&&1<=old('product_category')&&old('product_category')<=5)
+                
+                <option value="{{old('product_category')}}" selected>{{$product_categories->find(old('product_category'))->name}}</option>
+                
+                @else
+                <option value="" selected>選択してください</option>
+                @endif
+             @foreach($product_categories as $product_category)
+            <option value="{{ $product_category -> id }}" class="@error('product_category') is-invalid @enderror">{{ $product_category -> name }}</option>
+            @endforeach
+            
+            
+            
+            </select>
+            @error('product_category')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+          </div>
+        </div>
+
+<div class="form-group">
+          <label for="exampleFormControlSelect1">商品小カテゴリー</label>
+          <div class="is-invalid">
+            <select class="form-control children" id="exampleFormControlSelect1" name="product_subcategory" class="is-invalid">
+                
+                
+                @if(old('product_subcategory')==!null&&1<=old('product_subcategory')&&old('product_subcategory')<=25)
+                
+                <option value="{{old('product_subcategory')}}" selected>{{$product_subcategories->find(old('product_subcategory'))->name}}</option>
+                
+                @else
+                <option value="" selected>選択してください</option>
+                @endif
+             @foreach($product_subcategories as $product_subcategory)
+            <option value="{{ $product_subcategory -> id }}" data-val="{{$product_subcategory->product_categories_id}}" class="@error('product_subcategory') is-invalid @enderror">{{ $product_subcategory -> name }}</option>
+            @endforeach
+            
+            
+            
+            </select>
+            @error('product_subcategory')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+          </div>
+        </div>
                             
-                            
-                            
-                            </select>
-                            @error('product_subcategory')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                          </div>
-                        </div>
+                
+
 
 
   
+
+                        <!-- サーバから受けた内容を表示する。 -->
+                        <div id="main">
+                                </div>
+
+                        
+
   
-                
-                
-
-                
-                
-
-
-
-
+                        
 
                 <div class="form-group">
                     <label>商品説明</label>
@@ -100,4 +119,24 @@
         </div>
     </div>
 </div>
-@endsection
+
+
+
+
+
+                    
+                            <!-- サーバへ送信する内容を入力する。 -->
+                            
+                            ファイル1：<input type="file" id="file1"><br/>
+                            ファイル2：<input type="file" id="file2"><br/>
+                            ファイル3：<input type="file" id="file3"><br/>
+                            ファイル4：<input type="file" id="file4"><br/>
+                            <button  onclick="send();">アップロード</button>
+
+                            <!-- JavaScripts -->
+                            
+                            
+                            @endsection
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+                            <script src="{{ url('test.js') }}"></script>        
+                        </body>

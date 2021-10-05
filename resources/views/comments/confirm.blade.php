@@ -61,9 +61,13 @@
         
         <div class="md-form">
             <label for="body">商品評価</label>
+            {{ $comment->evaluation }}
+            <br>
+            <label for="body">商品コメント</label>
             {{ $comment->body }}
             <input class="form-control" type="hidden" id="body" name="body" required value="{{ $comment->body }}">
             <input class="form-control" type="hidden" id="post_id" name="post_id" required value="{{ $post->id }}">
+            <input class="form-control" type="hidden" id="evaluation" name="evaluation" required value="{{ $comment->evaluation }}">
         </div>
         <button type="submit" class="btn btn-primary">登録する</button><br><br>
         <button type="submit" class="btn btn-primary" name="back">前に戻る</button>

@@ -5,10 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use App\Rules\Gender;
 
 
 class UsersController extends Controller
 {
+    private $form_show = 'UsersController@edit';
+    private $form_confirm = 'UsersController@editconfirm';
+    private $form_complete = 'UsersController@complete';
+
+    private $formItems = ["id","name_sei","name_mei", "nickname","gender_id"];
+
+
     /**
      * Display a listing of the resource.
      *
@@ -64,7 +72,10 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        
+        
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -106,5 +117,34 @@ class UsersController extends Controller
         
         return view('users.delete_confirm');
     }
+
+
+    public function post(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        
+        $input = $request->only($this->formItems);
+        
+        
+        
+        // //セッションに書き込む
+        $request->session()->put("form_input", $input);
+       
+        
+        return view('users.edit_confirm', ["input" => $input]);
+    }
+
+    protected function validator(array $data)
+    {
+        
+        return Validator::make($data, [
+            'name_sei' => ['required', 'string', 'max:20'],
+            'name_mei' => ['required', 'string', 'max:20'],
+            'gender_id' => ['required',new Gender],
+            'nickname' => ['required', 'string', 'max:20'],
+            
+        ]);
+
+        }
 }
 

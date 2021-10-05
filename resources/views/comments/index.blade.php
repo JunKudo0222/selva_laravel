@@ -17,6 +17,10 @@
         width:20%;
 
     }
+    .hidden{
+        display:none;
+    }
+    
 </style>
 
 
@@ -31,8 +35,7 @@
         <div class="col-md-8">
             <div class="card-header">
                 <h5>{{ $post->name }}</h5><br>
-                <a>{{ $post->comments->count() }}コメント {{ $post->created_at->format('n/j/y H:i') }}</a>
-            </div>
+                </div>
             
             <div class="card-body">
                 <p class="card-text">{{ $post->created_at->format('Y.m.d H:i') }}</p>
@@ -59,8 +62,8 @@
             @foreach ($comments as $index=>$comment)
             <div class="card mt-3">
                 <div class="card-body">
-                    <h5 class="cname">投稿日時：{{ $comment->created_at->format('Y.m.d H:i') }}</h5>
-                    <p class="card-text">内容：{{ $comment->body }}</p>
+                    <p class="card-text">{{$user->find($comment->user_id)->name_mei}}さん：@for($i = 0; $i < $comment->evaluation; $i++)<div class="hidden">{{$i}}</div>★@endfor{{ $comment->evaluation }}</p>
+                    <p class="card-text">商品コメント：{{ $comment->body }}</p>
                 </div>
             </div>
             
