@@ -63,8 +63,9 @@ Route::post('/users', 'UsersController@store')->name('users.store');
 Route::get('/users/{user_id}', 'UsersController@show')->name('users.show');
 // 編集
 Route::get('/edit/{user_id}', 'UsersController@edit')->name('users.edit');
+Route::post('/edit/{user_id}', 'UsersController@post')->name('users.post');
 // 更新
-Route::put('/{user_id}', 'UsersController@update')->name('users.update');
+Route::put('/{id}', 'UsersController@update')->name('users.update');
 // 削除
 Route::delete('/{user_id}', 'UsersController@destroy')->name('users.destroy');
 Route::get('php/member_withdrawal.php','UsersController@delete_confirm')->name('users.delete_confirm');

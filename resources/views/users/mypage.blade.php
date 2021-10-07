@@ -6,12 +6,17 @@
         margin:20;
     }
     .right{
-        float:right;
+        display:center;
         margin:20;
+        margin-left:auto;
+        margin-right:auto;
     }
     .left{
         float:left;
         margin:20;
+        width:200px;
+        margin-left:auto;
+        margin-right:auto;
     }
     .bg{
         background-color:pink;
@@ -19,15 +24,6 @@
         width:100%;
         padding:0;
         margin:0;
-    }
-    
-    .select{
-        
-        width:20%;
-        
-        margin-left:auto;
-        margin-right:auto;
-        margin-top:50px;
     }
     
     
@@ -40,65 +36,33 @@
         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
         ログアウト
-        </a>
-    </div>
+    </a>
+</div>
 </div>
 @section('content')
 <div class="container">
-		<br>
-		<br>
-		<br>
-		<br>
-
-			<ul class="list-group">
-				<li class="list-group-item">ID: {{ $user->id }}</li>
-				<li class="list-group-item">名前: {{ $user->name_sei }}{{ $user->name_mei }}</li>
-				<li class="list-group-item">性別: @if($user->gender_id===1) 男性 @else 女性 @endif</li>
-				<li class="list-group-item">パスワード: セキュリティのため非表示</li>
-				<li class="list-group-item">メールアドレス: {{ $user->email }}</li>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <ul class="list-group">
+        <li class="list-group-item">氏名: {{ $user->name_sei }}{{ $user->name_mei }}</li>
+        <li class="list-group-item">ニックネーム: {{ $user->nickname }}</li>
+        <li class="list-group-item">性別: @if($user->gender_id===1) 男性 @else 女性 @endif</li>
+        <a href="{{ route('users.edit',$user->id) }}" class="btn btn-primary left">会員情報変更</a>
+        <li class="list-group-item">パスワード: セキュリティのため非表示</li>
+        <form action="{{ route('users.edit',$user->id) }}" class="left">
+        <button type="submit" class="btn btn-primary left" name="password">パスワード変更</button>
+        </form>
+        <li class="list-group-item">メールアドレス: {{ $user->email }}</li>
+        <form action="{{ route('users.edit',$user->id) }}" class="left">
+        <button type="submit" class="btn btn-primary left" name="email">メールアドレス変更</button>
+        </form>
+        <a href="{{route('users.delete_confirm')}}" class="btn btn-danger right">退会</a>
 			</ul>
-		
-
-            
-
-
-
-
-
-
-
-
-
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
-<div class="select">
 
-    <a href="{{ route('users.edit',$user->id) }}" class="btn btn-primary left">編集</a>
-    
 
-    
-    
-    <a href="{{route('users.delete_confirm')}}" class="btn btn-danger right">退会</a>
-</div>
 @endsection
 

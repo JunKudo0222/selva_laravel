@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('gender_id');
             $table->string('nickname');
+            $table->unsignedBigInteger('auth_code')->nullable();
         });
     }
 
