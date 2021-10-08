@@ -7,6 +7,8 @@ use App\Http\Requests\CommentRequest;
 use App\Comment;
 use App\Post;
 use App\User;
+use App\Product_category;
+use App\Product_subcategory;
 use Auth;
 
 class CommentController extends Controller
@@ -120,9 +122,34 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function destroyconfirm($id)
+    {
+        
+        $comment=Comment::find($id);
+        
+        return view('users.deletereview',compact('comment'));
+    }
+
     public function destroy($id)
     {
-        //
+        
+        $comment = Comment::find($id);
+        
+        if(Auth::id() !== $comment->user_id){
+            return abort(404);
+        }
+        $comment -> delete();
+        
+
+        $user = Auth::user();
+        $posts=Post::all();
+        $product_categories=Product_category::all();
+        $product_subcategories=Product_subcategory::all();
+        $comments=$user->load('comments');
+            $comments=$comments['comments'];
+            
+
+            return view('users.editreview', compact('user','comments','posts','product_categories','product_subcategories'));
     }
 
     public function confirm(CommentRequest $request)

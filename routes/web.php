@@ -99,3 +99,4 @@ Route::delete('/{post_id}', 'PostController@destroy')->name('posts.destroy');
 
 Route::resource('comments', 'CommentController');
 Route::post('comments/confirm', 'CommentController@confirm')->name('comments.confirm');
+Route::get('comments/delete/{id}', 'CommentController@destroyconfirm')->name('comments.destroyconfirm');

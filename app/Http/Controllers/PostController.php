@@ -99,10 +99,13 @@ class PostController extends Controller
         $post -> image4    = "storage/".$post->id."image4.jpeg";
         
         $post -> save(); //保存してあげましょう
-        rename('storage/image1.jpeg', $post->image1);
-        rename('storage/image2.jpeg', $post->image2);
-        rename('storage/image3.jpeg', $post->image3);
-        rename('storage/image4.jpeg', $post->image4);
+        if(isset($post->image1)){
+
+            rename('storage/image1.jpeg', $post->image1);
+            rename('storage/image2.jpeg', $post->image2);
+            rename('storage/image3.jpeg', $post->image3);
+            rename('storage/image4.jpeg', $post->image4);
+        }
 
         
         return redirect()->route('posts.index');

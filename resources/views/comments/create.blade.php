@@ -22,6 +22,13 @@
         width:20%;
 
     }
+    .thumbnail{
+        width:100px;
+        height:100px;
+    }
+    .hidden{
+        display:none;
+    }
 </style>
 
 
@@ -30,13 +37,18 @@
 <div class="topbutton">
     <a class="btn btn-primary" href="/">トップに戻る</a>
 </div>
-<h1>商品レビュー一覧</h1>
+<h1>商品レビュー登録</h1>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card-header">
+            @isset($post->image1)
+                <img class="thumbnail" src="{{ url($post->image1) }}">
+                
+                @endisset
                 <h5>{{ $post->name }}</h5><br>
-                <a>{{ $post->comments->count() }}コメント {{ $post->created_at->format('n/j/y H:i') }}</a>
+                <p class="card-text">■商品レビュー<br>総合評価 @for($i = 0; $i < ceil($post->comments->where('post_id',$post->id)->avg('evaluation')); $i++)<div class="hidden">{{$i}}</div>★@endfor
+                            {{ceil($post->comments->where('post_id',$post->id)->avg('evaluation'))}}</p>
             </div>
             
             <div class="card-body">

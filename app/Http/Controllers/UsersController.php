@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Comment;
+use App\Post;
+use App\Product_category;
+use App\Product_subcategory;
 use Auth;
 use App\Rules\Gender;
 use Illuminate\Support\Facades\Validator;
@@ -77,7 +81,11 @@ class UsersController extends Controller
      */
     public function edit(Request $request, $id)
     {
+        
         $user = User::find($id);
+        $posts=Post::all();
+        $product_categories=Product_category::all();
+        $product_subcategories=Product_subcategory::all();
         
         if($request->has("password")){
 
@@ -85,6 +93,13 @@ class UsersController extends Controller
         }
         elseif($request->has("email")){
             return view('users.editemail', compact('user'));
+        }
+        elseif($request->has("review")){
+            $comments=$user->load('comments');
+            $comments=$comments['comments'];
+            
+
+            return view('users.editreview', compact('user','comments','posts','product_categories','product_subcategories'));
         }
         else{
 
@@ -113,6 +128,7 @@ class UsersController extends Controller
             $user->save();
         }
         elseif($request->has("email")){
+            $this->validator($request->all())->validate();
             $user=Auth::user();
             $user->auth_code=substr(str_shuffle('1234567890'), 0, 6);
             $user->save();
@@ -230,6 +246,11 @@ class UsersController extends Controller
                 
             ]);
         }
+        elseif(isset($data['email'])){
+            return Validator::make($data, [
+            'email' => 'required|string|email|max:200|unique:users,email,NULL,id,deleted_at,NULL',
+            ]);
+        }
         else{
 
             return Validator::make($data, [
@@ -246,6 +267,12 @@ class UsersController extends Controller
     {
         // return $this->showUserList();
         return redirect()->route('users.show',Auth::id());
+    }
+
+    public function review()
+    {
+        
+        return view('users.review');
     }
 }
 

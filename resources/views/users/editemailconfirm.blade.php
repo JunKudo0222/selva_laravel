@@ -21,7 +21,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="lefttitle">メールアドレス編集</h1>
+                    <h1 class="lefttitle">メールアドレス編集　認証コード入力</h1>
                     <a href="{{ route('users.show',$user->id) }}" class="btn btn-primary rightbutton">マイページへ戻る</a>
                 </div>
                 @if(isset($message))
@@ -69,7 +69,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    認証メール送信
+                                    認証コードを送信してメールアドレスの変更を完了する
                                 </button>
                             </div>
                         </div>
