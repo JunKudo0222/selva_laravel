@@ -10,9 +10,11 @@ use App\User;
 use App\Product_category;
 use App\Product_subcategory;
 use Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
+    private $formItems = ["evaluation","body","comment_id","post_id"];
     public function __construct()
     {
         $this->middleware('auth');
@@ -101,8 +103,28 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment=Comment::find($id);
+        $post=Post::find($comment->post_id);
+        
+        return view('users.updatereview',compact('comment','post'));
     }
+
+    public function editconfirm(CommentRequest $request)
+    {
+        
+        $comment=Comment::find($request->comment_id);
+        $post=Post::find($request->post_id);
+        $this->validator($request->all())->validate();
+        $input = $request->only($this->formItems);
+        
+    
+        // //セッションに書き込む
+        $request->session()->put("form_input", $input);
+        // $id=$input['id'];
+
+        return view('users.updatereviewconfirm', ["input" => $input,'post'=>$post]);
+    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -111,9 +133,23 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $request->session()->regenerateToken();
+        //セッションから値を取り出す
+        $input = $request->session()->get("form_input");
+        
+        $comment=Comment::find($input['comment_id']);
+        $comment->evaluation=$input['evaluation'];
+        $comment->body=$input['body'];
+        $comment->save();
+        $user=Auth::user();
+        $comments=$user->load('comments');
+        $comments=$comments['comments'];
+        $posts=Post::all();
+        $product_categories=Product_category::all();
+        $product_subcategories=Product_subcategory::all();
+        return view('users.editreview', compact('user','comments','posts','product_categories','product_subcategories'));
     }
 
     /**
@@ -154,6 +190,9 @@ class CommentController extends Controller
 
     public function confirm(CommentRequest $request)
     {   
+
+        
+    
         $post=Post::find($request->post_id);
         $comment = new Comment; //インスタンスを作成
         $comment -> body    = $request -> body; //ユーザー入力のnameを代入
@@ -162,5 +201,17 @@ class CommentController extends Controller
         $comment -> evaluation  = $request->evaluation; //ログイン中のユーザーidを代入
         
         return view('comments.confirm',compact('comment','post'));
+    }
+
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+        
+        'evaluation' => ['required', 'between:1,5','integer'],
+        'body' => ['required', 'string', 'max:200'],
+        
+        ]);
+        
     }
 }

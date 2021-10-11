@@ -46,6 +46,7 @@
                     <p class="card-text">{{ mb_strimwidth( $comment->body, 0, 16, '…', 'UTF-8' ) }}</p>
                 </div>
             </div>
+            <a class="btn btn-primary" href="{{route('comments.edit',$comment->id)}}">編集</a>
             <a class="btn btn-primary" href="{{route('comments.destroyconfirm',$comment->id)}}">削除</a>
             
             @endforeach
