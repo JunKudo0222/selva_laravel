@@ -216,7 +216,7 @@ class ManageUserController extends Controller
     function registered(Request $request)
     {
         // return $this->showUserList();
-        return redirect()->route('users.userlist');
+        return redirect()->route('members.userlist');
     }
 
     public function showRegistrationForm()
@@ -236,7 +236,7 @@ class ManageUserController extends Controller
 
         //セッションを空にする
         $request->session()->forget("form_input");
-        return redirect()->route('users.userlist');
+        return redirect()->route('members.userlist');
            
     }
     protected function create(array $data)

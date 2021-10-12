@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Post;
+use App\User;
 use App\Comment;
 use App\Product_category;
 use App\Product_subcategory;
@@ -46,10 +47,10 @@ class ManageProductController extends Controller
 		$comments = Comment::all()->where('post_id',$id);
         $product_category=Product_category::all()->where('id',$product->product_category)->first();
         $product_subcategory=Product_subcategory::all()->where('id',$product->product_subcategory)->first();
-        
+        $users=User::all();
 
         
-		return view("admin.product_detail",compact('product','comments','product_category','product_subcategory'));
+		return view("admin.product_detail",compact('product','comments','product_category','product_subcategory','users'));
 	}
     function search(Request $request){
         

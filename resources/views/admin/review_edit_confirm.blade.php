@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 @if(isset($input['id']))
-    <form method="POST" action="{{ route('members.update',['id'=>$input['id']]) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('users.update',['id'=>$input['id']]) }}" enctype="multipart/form-data">
 @else
-    <form method="POST" action="{{ route('members.register') }}">
+    <form method="POST" action="{{ route('users.register') }}">
 @endif
 
                         @csrf

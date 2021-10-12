@@ -55,9 +55,9 @@
 <h1 class="topbar-content">会員一覧</h1>
 <a href="{{ route('admin.top') }}" class="btn btn-primary topbar-content2">トップへ戻る</a>
 </div>
-<a href="{{ route('users.register_show') }}" class="btn btn-primary regist">会員登録</a>
+<a href="{{ route('members.register_show') }}" class="btn btn-primary regist">会員登録</a>
 
-<form action="{{route('users.search')}}" method="get" class="searchbar">
+<form action="{{route('members.search')}}" method="get" class="searchbar">
 					@csrf
                     <table class="searchtable card" border="5">
                     <tr>
@@ -93,15 +93,15 @@
 				<table border="1" class="sorttbl" id="sampleTable">
                 <thead bgcolor="pink">
                     <tr>
-                    <th>ID @if(isset($sort))<a href="{{ route('users.userlist') }}">▼</a> 
-                        @else<a href="{{ route('users.userlist',['sort'=>'asc']) }}">▲</a>
+                    <th>ID @if(isset($sort))<a href="{{ route('members.userlist') }}">▼</a> 
+                        @else<a href="{{ route('members.userlist',['sort'=>'asc']) }}">▲</a>
                     
                     @endif</th>
                     <th>氏名</th>
                     <th>性別</th>
                     <th>メールアドレス</th>
-                    <th>登録日時 @if(isset($sort))<a href="{{ route('users.userlist') }}">▼</a> 
-                        @else<a href="{{ route('users.userlist',['sort'=>'asc']) }}">▲</a>
+                    <th>登録日時 @if(isset($sort))<a href="{{ route('members.userlist') }}">▼</a> 
+                        @else<a href="{{ route('members.userlist',['sort'=>'asc']) }}">▲</a>
                     
                     @endif</th>
                     <th>編集</th>
@@ -115,12 +115,12 @@
 				
 					
 						<td>{{$user->id}}</td>
-                        <td><a href="{{ route('users.detail' , $user->id) }}">{{ $user->name_sei }}{{ $user->name_mei }}</a></td>
+                        <td><a href="{{ route('members.detail' , $user->id) }}">{{ $user->name_sei }}{{ $user->name_mei }}</a></td>
                         <td> @if($user->gender_id==1)男性@else 女性@endif </td>
                         <td>{{$user->email}}</td>
                         <td> {{$user->created_at->format('Y/m/d')}}</td>
-                        <td><a href="{{ route('users.edit' , $user->id) }}">編集</a></td>
-                        <td><a href="{{ route('users.detail' , $user->id) }}">詳細</a></td>
+                        <td><a href="{{ route('members.edit' , $user->id) }}">編集</a></td>
+                        <td><a href="{{ route('members.detail' , $user->id) }}">詳細</a></td>
 					
 				
                 </tr>

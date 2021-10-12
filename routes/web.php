@@ -113,22 +113,22 @@ Route::group(['middleware' => ['auth.admin']], function () {
 	//ログアウト実行
 	Route::post('php/admin/logout.php', 'admin\AdminLogoutController@logout');
 	//ユーザー一覧
-	Route::get('php/admin/member.php', 'admin\ManageUserController@showUserList')->name('users.userlist');
+	Route::get('php/admin/member.php', 'admin\ManageUserController@showUserList')->name('members.userlist');
     //ユーザー検索
-	Route::get('php/admin/member.php/search', 'admin\ManageUserController@search')->name('users.search');
+	Route::get('php/admin/member.php/search', 'admin\ManageUserController@search')->name('members.search');
 	//ユーザー詳細
-	Route::get('php/admin/member_detail.php/{id}', 'admin\ManageUserController@showUserDetail')->name('users.detail');
+	Route::get('php/admin/member_detail.php/{id}', 'admin\ManageUserController@showUserDetail')->name('members.detail');
 	//ユーザー編集
-	Route::get('php/admin/member_edit.php/{id}', 'admin\ManageUserController@edit')->name('users.edit');
-	Route::post('php/admin/member_edit.php', 'admin\ManageUserController@post')->name('users.post');
+	Route::get('php/admin/member_edit.php/{id}', 'admin\ManageUserController@edit')->name('members.edit');
+	Route::post('php/admin/member_edit.php', 'admin\ManageUserController@post')->name('members.post');
 	//ユーザー編集確認
-	Route::get('php/admin/member_edit.php/confirm', 'admin\ManageUserController@editconfirm')->name('users.editconfirm');
+	Route::get('php/admin/member_edit.php/confirm', 'admin\ManageUserController@editconfirm')->name('members.editconfirm');
 	//ユーザー編集完了
-	Route::put('php/admin/member_edit.php/{id}', 'admin\ManageUserController@update')->name('users.update');
+	Route::put('php/admin/member_edit.php/{id}', 'admin\ManageUserController@update')->name('members.update');
     //ユーザー登録
-	Route::get('php/admin/member_regist.php', 'admin\ManageUserController@showRegistrationForm')->name('users.register_show');
+	Route::get('php/admin/member_regist.php', 'admin\ManageUserController@showRegistrationForm')->name('members.register_show');
 	//ユーザー登録完了
-	Route::post('php/admin/member_regist.php', 'admin\ManageUserController@register')->name('users.register');
+	Route::post('php/admin/member_regist.php', 'admin\ManageUserController@register')->name('members.register');
 
 
 

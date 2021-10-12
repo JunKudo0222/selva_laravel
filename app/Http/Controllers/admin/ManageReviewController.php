@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Comment;
+use App\Post;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\Registerscategories;
 use Illuminate\Support\Facades\Hash;
@@ -40,8 +41,12 @@ class ManageReviewController extends Controller
 
     function showReviewDetail($id){
 		$review = Comment::find($id);
+        $product=Post::all()->where('id',$review->post_id)->first();
+        $comments=$product->load('comments');
+        $comments=$comments['comments'];
         
-		return view("admin.review_detail",compact('review','subcategories'));
+        
+		return view("admin.review_detail",compact('review','product','comments'));
 	}
     function search(Request $request){
         

@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-header">
                     <h1 class="lefttitle">会員編集</h1>
-                    <a href="{{ route('members.userlist') }}" class="btn btn-primary rightbutton">一覧へ戻る</a>
+                    <a href="{{ route('users.userlist') }}" class="btn btn-primary rightbutton">一覧へ戻る</a>
                 </div>
                 @if ($errors->any())
                 <div class="alert alert-success">
@@ -37,7 +37,7 @@
                     
                     
                     
-                    <form method="POST" action="{{ route('members.post') }}">
+                    <form method="POST" action="{{ route('users.post') }}">
                         @isset($user)
                         ID {{$user->id}}
                         @endisset
@@ -210,7 +210,7 @@
             <div class="card">
                 <div class="card-header">
                     <h1 class="lefttitle">会員登録</h1>
-                    <a href="{{ route('members.userlist') }}" class="btn btn-primary rightbutton">一覧へ戻る</a>
+                    <a href="{{ route('users.userlist') }}" class="btn btn-primary rightbutton">一覧へ戻る</a>
                 </div>
                 @if ($errors->any())
                 <div class="alert alert-success">
@@ -225,7 +225,7 @@
                     
                     
                     
-                    <form method="POST" action="{{ route('members.post') }}">
+                    <form method="POST" action="{{ route('users.post') }}">
                         
                         ID 登録後に自動採番
                         

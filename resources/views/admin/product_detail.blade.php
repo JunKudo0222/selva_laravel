@@ -65,7 +65,7 @@
                 <br>
                 @foreach($comments as $comment)
 				<li class="list-group-item">商品レビューID: {{ $comment->id}}</li>
-				<li class="list-group-item">{{ $comment->user_id}}さん</li>
+				<a href="{{route('members.detail',['id'=>$comment->user_id])}}"><li class="list-group-item">{{ $users->find($comment->user_id)->name_mei}}さん</li></a>
 				<li class="list-group-item">@for($i = 0; $i < $comment->evaluation; $i++)<div class="hidden">{{$i}}</div>★@endfor{{ $comment->evaluation }}</li>
 				<li class="list-group-item">商品コメント: {{ $comment->body}}</li>
 				<a href="{{ route('reviews.detail',$comment->id) }}" class="btn btn-primary left">商品レビュー詳細</a>

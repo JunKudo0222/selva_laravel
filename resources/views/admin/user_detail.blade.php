@@ -35,7 +35,7 @@
 <div class="bg">
 <h1 class="detailbar"> 会員詳細</h1>
     <div class="right">
-        <a href="{{ route('users.userlist') }}" class="btn btn-primary">一覧へ戻る</a>
+        <a href="{{ route('members.userlist') }}" class="btn btn-primary">一覧へ戻る</a>
     </div>
 </div>
 @section('content')
@@ -58,7 +58,7 @@
 </div>
 <div class="select">
 
-    <a href="{{ route('users.edit',$user->id) }}" class="btn btn-primary left">編集</a>
+    <a href="{{ route('members.edit',$user->id) }}" class="btn btn-primary left">編集</a>
     
 
     
