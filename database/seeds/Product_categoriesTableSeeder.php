@@ -13,11 +13,11 @@ class Product_categoriesTableSeeder extends Seeder
     {
         DB::table('product_categories')->insert([
             
-            ['name' => '収納家具'],
-            ['name' => '家電'],
-            ['name' => 'ファッション'],
-            ['name' => '美容'],
-            ['name' => '本・雑誌'],
+            ['name' => '収納家具','created_at' => new Datetime()],
+            ['name' => '家電','created_at' => new Datetime()],
+            ['name' => 'ファッション','created_at' => new Datetime()],
+            ['name' => '美容','created_at' => new Datetime()],
+            ['name' => '本・雑誌','created_at' => new Datetime()],
         ]);
     }
 }

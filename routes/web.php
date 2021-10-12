@@ -101,3 +101,78 @@ Route::resource('comments', 'CommentController');
 Route::post('comments/confirm', 'CommentController@confirm')->name('comments.confirm');
 Route::get('comments/delete/{id}', 'CommentController@destroyconfirm')->name('comments.destroyconfirm');
 Route::post('comments/editconfirm', 'CommentController@editconfirm')->name('comments.editconfirm');
+
+
+
+
+//管理側
+Route::group(['middleware' => ['auth.admin']], function () {
+	
+	//管理側トップ
+	Route::get('php/admin.php', 'admin\AdminTopController@show')->name('admin.top');
+	//ログアウト実行
+	Route::post('php/admin/logout.php', 'admin\AdminLogoutController@logout');
+	//ユーザー一覧
+	Route::get('php/admin/member.php', 'admin\ManageUserController@showUserList')->name('users.userlist');
+    //ユーザー検索
+	Route::get('php/admin/member.php/search', 'admin\ManageUserController@search')->name('users.search');
+	//ユーザー詳細
+	Route::get('php/admin/member_detail.php/{id}', 'admin\ManageUserController@showUserDetail')->name('users.detail');
+	//ユーザー編集
+	Route::get('php/admin/member_edit.php/{id}', 'admin\ManageUserController@edit')->name('users.edit');
+	Route::post('php/admin/member_edit.php', 'admin\ManageUserController@post')->name('users.post');
+	//ユーザー編集確認
+	Route::get('php/admin/member_edit.php/confirm', 'admin\ManageUserController@editconfirm')->name('users.editconfirm');
+	//ユーザー編集完了
+	Route::put('php/admin/member_edit.php/{id}', 'admin\ManageUserController@update')->name('users.update');
+    //ユーザー登録
+	Route::get('php/admin/member_regist.php', 'admin\ManageUserController@showRegistrationForm')->name('users.register_show');
+	//ユーザー登録完了
+	Route::post('php/admin/member_regist.php', 'admin\ManageUserController@register')->name('users.register');
+
+
+
+	//商品カテゴリ一覧
+	Route::get('php/admin/category.php', 'admin\ManageCategoryController@showCategoryList')->name('categories.categorylist');
+    //商品カテゴリ検索
+	Route::get('php/admin/category.php/search', 'admin\ManageCategoryController@search')->name('categories.search');
+	//商品カテゴリ詳細
+	Route::get('php/admin/category_detail.php/{id}', 'admin\ManageCategoryController@showCategoryDetail')->name('categories.detail');
+	//商品カテゴリ編集
+	Route::get('php/admin/category_edit.php/{id}', 'admin\ManageCategoryController@edit')->name('categories.edit');
+	Route::post('php/admin/category_edit.php', 'admin\ManageCategoryController@post')->name('categories.post');
+	//商品カテゴリ編集確認
+	Route::get('php/admin/category_edit.php/confirm', 'admin\ManageCategoryController@editconfirm')->name('categories.editconfirm');
+	//商品カテゴリ編集完了
+	Route::put('php/admin/category_edit.php/{id}', 'admin\ManageCategoryController@update')->name('categories.update');
+    //商品カテゴリ登録
+	Route::get('php/admin/category_regist.php', 'admin\ManageCategoryController@showRegistrationForm')->name('categories.register_show');
+	//商品カテゴリ登録完了
+	Route::post('php/admin/category_regist.php', 'admin\ManageCategoryController@register')->name('categories.register');
+    //商品カテゴリ削除
+    Route::delete('php/admin/category_delete.php/{id}', 'admin\ManageCategoryController@destroy')->name('categories.destroy');
+
+
+
+	//商品一覧
+	Route::get('php/admin/product.php', 'admin\ManageProductController@showProductList')->name('products.productlist');
+    //商品検索
+	Route::get('php/admin/product.php/search', 'admin\ManageProductController@search')->name('products.search');
+	//商品詳細
+	Route::get('php/admin/product_detail.php/{id}', 'admin\ManageProductController@showProductDetail')->name('products.detail');
+	//商品編集
+	Route::get('php/admin/product_edit.php/{id}', 'admin\ManageProductController@edit')->name('products.edit');
+	Route::post('php/admin/product_edit.php', 'admin\ManageProductController@post')->name('products.post');
+	//商品編集確認
+	Route::get('php/admin/product_edit.php/confirm', 'admin\ManageProductController@editconfirm')->name('products.editconfirm');
+	//商品編集完了
+	Route::put('php/admin/product_edit.php/{id}', 'admin\ManageProductController@update')->name('products.update');
+    //商品登録
+	Route::get('php/admin/product_regist.php', 'admin\ManageProductController@showRegistrationForm')->name('products.register_show');
+	//商品登録完了
+	Route::post('php/admin/product_regist.php', 'admin\ManageProductController@register')->name('products.register');
+});
+
+//管理側ログイン
+Route::get('php/admin/login.php', 'admin\AdminLoginController@showLoginform')->name('admin.login');
+Route::post('php/admin/login.php', 'admin\AdminLoginController@login')->name('admin.logout');
