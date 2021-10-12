@@ -47,7 +47,9 @@
 @section('content')
 <div>
 				<a href="{{ route('users.userlist') }}" class="btn btn-primary">会員一覧</a><br><br>
-				<a href="{{ route('categories.categorylist') }}" class="btn btn-primary">商品カテゴリ一覧</a>
+				<a href="{{ route('categories.categorylist') }}" class="btn btn-primary">商品カテゴリ一覧</a><br><br>
+				<a href="{{ route('products.productlist') }}" class="btn btn-primary">商品一覧</a><br><br>
+				<a href="{{ route('reviews.reviewlist') }}" class="btn btn-primary">商品レビュー一覧</a>
 			</div>
 @endsection
 

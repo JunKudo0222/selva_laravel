@@ -162,7 +162,7 @@ Route::group(['middleware' => ['auth.admin']], function () {
 	Route::get('php/admin/product_detail.php/{id}', 'admin\ManageProductController@showProductDetail')->name('products.detail');
 	//商品編集
 	Route::get('php/admin/product_edit.php/{id}', 'admin\ManageProductController@edit')->name('products.edit');
-	Route::post('php/admin/product_edit.php', 'admin\ManageProductController@post')->name('products.post');
+	Route::post('php/admin/product_edit.php', 'admin\ManageProductController@product')->name('products.product');
 	//商品編集確認
 	Route::get('php/admin/product_edit.php/confirm', 'admin\ManageProductController@editconfirm')->name('products.editconfirm');
 	//商品編集完了
@@ -171,6 +171,32 @@ Route::group(['middleware' => ['auth.admin']], function () {
 	Route::get('php/admin/product_regist.php', 'admin\ManageProductController@showRegistrationForm')->name('products.register_show');
 	//商品登録完了
 	Route::post('php/admin/product_regist.php', 'admin\ManageProductController@register')->name('products.register');
+	//商品削除
+    Route::delete('php/admin/product_delete.php/{id}', 'admin\ManageProductController@destroy')->name('products.destroy');
+
+
+
+
+
+	//レビュー一覧
+	Route::get('php/admin/review.php', 'admin\ManageReviewController@showReviewList')->name('reviews.reviewlist');
+    //レビュー検索
+	Route::get('php/admin/review.php/search', 'admin\ManageReviewController@search')->name('reviews.search');
+	//レビュー詳細
+	Route::get('php/admin/review_detail.php/{id}', 'admin\ManageReviewController@showReviewDetail')->name('reviews.detail');
+	//レビュー編集
+	Route::get('php/admin/review_edit.php/{id}', 'admin\ManageReviewController@edit')->name('reviews.edit');
+	Route::post('php/admin/review_edit.php', 'admin\ManageReviewController@post')->name('reviews.post');
+	//レビュー編集確認
+	Route::get('php/admin/review_edit.php/confirm', 'admin\ManageReviewController@editconfirm')->name('reviews.editconfirm');
+	//レビュー編集完了
+	Route::put('php/admin/review_edit.php/{id}', 'admin\ManageReviewController@update')->name('reviews.update');
+    //レビュー登録
+	Route::get('php/admin/review_regist.php', 'admin\ManageReviewController@showRegistrationForm')->name('reviews.register_show');
+	//レビュー登録完了
+	Route::post('php/admin/review_regist.php', 'admin\ManageReviewController@register')->name('reviews.register');
+	//レビュー削除
+    Route::delete('php/admin/review_delete.php/{id}', 'admin\ManageReviewController@destroy')->name('reviews.destroy');
 });
 
 //管理側ログイン
