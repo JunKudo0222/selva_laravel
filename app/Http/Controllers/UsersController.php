@@ -207,7 +207,7 @@ class UsersController extends Controller
         }
         else{
             $user->delete();
-            return redirect()->route('users.userlist');
+            return redirect()->route('members.userlist');
         }
 
     }

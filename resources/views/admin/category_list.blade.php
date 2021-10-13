@@ -52,10 +52,10 @@
 
 
 <div class="topbar">
-<h1 class="topbar-content">会員一覧</h1>
+<h1 class="topbar-content">商品カテゴリ一覧</h1>
 <a href="{{ route('admin.top') }}" class="btn btn-primary topbar-content2">トップへ戻る</a>
 </div>
-<a href="{{ route('categories.register_show') }}" class="btn btn-primary regist">会員登録</a>
+<a href="{{ route('categories.register_show') }}" class="btn btn-primary regist">商品カテゴリ登録</a>
 
 <form action="{{route('categories.search')}}" method="get" class="searchbar">
 					@csrf

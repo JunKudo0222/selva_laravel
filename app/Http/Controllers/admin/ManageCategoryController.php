@@ -81,13 +81,36 @@ class ManageCategoryController extends Controller
     public function edit($id)
     {
         $category = Product_category::find($id);
+        $subcategories = Product_subcategory::all()->where('product_categories_id',$id);
         
-        return view('admin.category_edit', compact('category'));
+        
+        
+        return view('admin.category_edit', compact('category','subcategories'));
     }
 
     public function showRegistrationForm()
     {
         return view('admin.category_edit');
+    }
+
+    function post(Request $request)
+    {
+        
+        dd($request);
+        $this->validator($request->all())->validate();
+        
+        $input = $request->only($this->formItems);
+        
+        
+        
+        // //セッションに書き込む
+        $request->session()->put("form_input", $input);
+        // $id=$input['id'];
+
+        return view('admin.user_edit_confirm', ["input" => $input]);
+        
+        
+        
     }
 }
 
