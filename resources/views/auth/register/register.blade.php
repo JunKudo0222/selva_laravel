@@ -84,7 +84,7 @@
                             <label for="nickname" class="col-md-4 col-form-label text-md-right">{{ __('ニックネーム') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nickname" type="text" class="form-control @error('nickname') is-invalid @enderror" name="nickname" value="{{ old('nickname') }}"  autocomplete="nickname">
+                                <input id="nickname" type="text" class="form-control @error('nickname') is-invalid @enderror" name="nickname" value="{{ old('nickname') }}"  required autocomplete="nickname">
                                 @error('nickname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

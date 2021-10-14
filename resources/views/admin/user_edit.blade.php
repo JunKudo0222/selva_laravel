@@ -105,9 +105,9 @@
 
                             <div class="col-md-6">
                                 @if(old('nickname')==!null)
-                                <input id="nickname" type="text" class="form-control" name="nickname" value="{{ old('nickname') }}"  autocomplete="nickname">
+                                <input id="nickname" type="text" class="form-control" name="nickname" value="{{ old('nickname') }}" required autocomplete="nickname">
                                 @else
-                                <input id="nickname" type="text" class="form-control" name="nickname" value="{{ $user->nickname }}"  autocomplete="nickname">
+                                <input id="nickname" type="text" class="form-control" name="nickname" value="{{ $user->nickname }}" required autocomplete="nickname">
                                 @endif
                                 @error('nickname')
                                     <span class="invalid-feedback" role="alert">
