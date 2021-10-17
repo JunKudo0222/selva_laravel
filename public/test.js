@@ -1,16 +1,17 @@
-
 function send(){
- 
+    
+    
     //ajaxでのcsrfトークン送信
     $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
     
     //テキストの入力値を取得する。
     
- 
+    
+    
     //アップロードファイルの入力値を取得する。
     var fileData1 = document.getElementById("file1").files[0];
     var fileData2 = document.getElementById("file2").files[0];
@@ -119,9 +120,103 @@ function change(){
 
  
         
-    
 
 
 
 
 
+
+
+var allow_exts = new Array('jpg', 'jpeg', 'png','gif');
+// changeイベントで呼び出す関数
+function handleFileSelect1(){
+    const sizeLimit = 1024 * 1024 * 10;　// 制限サイズ
+    const fileInput = document.getElementById('file1'); // input要素
+    const files = fileInput.files;
+    for (let i = 0; i < files.length; i++) {
+        if (files[i].size > sizeLimit) {
+            // ファイルサイズが制限以上
+            alert('ファイルサイズは10MB以下にしてください'); // エラーメッセージを表示
+            fileInput.value = ''; // inputの中身をリセット
+            return; // この時点で処理を終了する
+        }
+        
+        if (!checkExt(files[i].name)) {
+            alert(files[i].name+'はアップロードできません');
+            fileInput.value = ''; // inputの中身をリセット
+            return false;
+        }
+    }
+        
+//チェックを通ったらtrueを返す
+return true;
+}
+//アップロード予定のファイル名の拡張子が許可されているか確認する関数
+function checkExt(filename)
+{
+	//比較のため小文字にする
+	var ext = getExt(filename).toLowerCase();
+	//許可する拡張子の一覧(allow_exts)から対象の拡張子があるか確認する
+	if (allow_exts.indexOf(ext) === -1) return false;
+	return true;
+}
+//ファイル名から拡張子を取得する関数
+function getExt(filename)
+{
+	var pos = filename.lastIndexOf('.');
+	if (pos === -1) return '';
+	return filename.slice(pos + 1);
+}
+
+
+
+
+
+
+
+
+
+
+
+// changeイベントで呼び出す関数
+function handleFileSelect2(){
+    const sizeLimit = 1024 * 1024 * 10;　// 制限サイズ
+    const fileInput = document.getElementById('file2'); // input要素
+  const files = fileInput.files;
+  for (let i = 0; i < files.length; i++) {
+    if (files[i].size > sizeLimit) {
+      // ファイルサイズが制限以上
+      alert('ファイルサイズは10MB以下にしてください'); // エラーメッセージを表示
+      fileInput.value = ''; // inputの中身をリセット
+      return; // この時点で処理を終了する
+    }
+  }
+}
+// changeイベントで呼び出す関数
+function handleFileSelect3(){
+    const sizeLimit = 1024 * 1024 * 10;　// 制限サイズ
+    const fileInput = document.getElementById('file3'); // input要素
+  const files = fileInput.files;
+  for (let i = 0; i < files.length; i++) {
+    if (files[i].size > sizeLimit) {
+      // ファイルサイズが制限以上
+      alert('ファイルサイズは10MB以下にしてください'); // エラーメッセージを表示
+      fileInput.value = ''; // inputの中身をリセット
+      return; // この時点で処理を終了する
+    }
+  }
+}
+// changeイベントで呼び出す関数
+function handleFileSelect4(){
+    const sizeLimit = 1024 * 1024 * 10;　// 制限サイズ
+    const fileInput = document.getElementById('file4'); // input要素
+  const files = fileInput.files;
+  for (let i = 0; i < files.length; i++) {
+    if (files[i].size > sizeLimit) {
+      // ファイルサイズが制限以上
+      alert('ファイルサイズは10MB以下にしてください'); // エラーメッセージを表示
+      fileInput.value = ''; // inputの中身をリセット
+      return; // この時点で処理を終了する
+    }
+  }
+}

@@ -26,7 +26,7 @@ class PostRequest extends FormRequest
         return [
             'name'=>'required|max:20',
             'product_content'=>'required',
-
+            
         ];
     }
 
@@ -36,6 +36,8 @@ class PostRequest extends FormRequest
         'name.required' => '商品名は必須です。',
     'name.max'      => '商品名は20文字以内で記入してください。',
         'product_content.required'  => '内容は必須です。',
+        
+        
     ];
 }
 }

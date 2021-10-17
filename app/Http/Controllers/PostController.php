@@ -42,22 +42,31 @@ class PostController extends Controller
     public function test(Request $request){
 
         
-        
         //アップロードパスを指定する。(/storage/upload)
         // $upload_file_path = storage_path().'/upload/';
         $upload_file_path = storage_path().'/app/public/';
         
         // アップロードファイルを受け取る。
-        $result = $request->file('file1')->isValid();  
-        if($result){  
-            
-            //ファイルを格納する。
-            $request->file('file1')->move($upload_file_path ,"image1.jpeg");
-            $request->file('file2')->move($upload_file_path ,"image2.jpeg");
-            $request->file('file3')->move($upload_file_path ,"image3.jpeg");
-            $request->file('file4')->move($upload_file_path ,"image4.jpeg");
-            
+        
+        //ファイルを格納する。
+        if($request->file('file1')==!null){
+        $request->file('file1')->move($upload_file_path ,"image1.jpeg");
+        } 
+        
+
+        if($request->file('file2')==!null){
+        $request->file('file2')->move($upload_file_path ,"image2.jpeg");
         }
+
+        if($request->file('file3')==!null){
+        $request->file('file3')->move($upload_file_path ,"image3.jpeg");
+        }  
+
+        if($request->file('file4')==!null){      
+        $request->file('file4')->move($upload_file_path ,"image4.jpeg");
+        } 
+            
+            
         
         
         
