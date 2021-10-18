@@ -164,7 +164,7 @@ function send4(){
 
    
 
-       $('.children').attr('disabled', true);
+       
        
        
        var $children = $('.children'); //都道府県の要素を変数に入れます。
@@ -172,7 +172,6 @@ function send4(){
        
     function change(){
            
-           $('.children').attr('disabled', false);
            
         
         
@@ -198,7 +197,6 @@ function send4(){
             
             //成功の場合、以下を行う。
             success: function(data){
-                
                 //選択された地方のvalueを取得し変数に入れる
                 var val1 = $('.parent').val();
                 
@@ -210,9 +208,8 @@ function send4(){
                     if (val1 != val2) {
                         $(this).not(':first-child').remove();
                     }
-                    $('.modori').html('選択して下さい').val("");
+                    
                 });
-                
                 
                 //地方側のselect要素が未選択の場合、都道府県をdisabledにする
   if ($('.parent').val() == "") {

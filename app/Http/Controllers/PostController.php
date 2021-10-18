@@ -51,28 +51,24 @@ class PostController extends Controller
         //ファイルを格納する。
         if($request->file('file1')==!null){
         $request->file('file1')->move($upload_file_path ,"image1.jpeg");
+        return view('image1');
         } 
         
 
         if($request->file('file2')==!null){
         $request->file('file2')->move($upload_file_path ,"image2.jpeg");
+        return view('image2');
         }
 
         if($request->file('file3')==!null){
         $request->file('file3')->move($upload_file_path ,"image3.jpeg");
+        return view('image3');
         }  
 
         if($request->file('file4')==!null){      
         $request->file('file4')->move($upload_file_path ,"image4.jpeg");
-        } 
-            
-            
-        
-        
-        
-        //テキストの内容を付与してhtml(test.blade.php)を返却する。
-        return view('image');
-        
+        return view('image4');
+        }   
     }
 
     /**
@@ -85,7 +81,7 @@ class PostController extends Controller
     {
         
         $request->session()->regenerateToken();
-        $input = $request->only('name','product_category','product_subcategory','product_content');
+        $input = $request->only('name','product_category','product_subcategory','product_content','image1','image2','image3','image4');
         $request->session()->put("form_input", $input);
         //セッションから値を取り出す
         $input = $request->session()->get("form_input");
@@ -102,21 +98,33 @@ class PostController extends Controller
         $post -> product_content     = $request -> product_content; //ユーザー入力のproduct_contentを代入
         $post -> user_id  = Auth::id(); //ログイン中のユーザーidを代入
         $post -> save(); //保存してあげましょう
-        $post -> image1    = "storage/".$post->id."image1.jpeg";
-        $post -> image2    = "storage/".$post->id."image2.jpeg";
-        $post -> image3    = "storage/".$post->id."image3.jpeg";
-        $post -> image4    = "storage/".$post->id."image4.jpeg";
+        if($request->image1==!null){
+            $post -> image1    = "storage/".$post->id."image1.jpeg";
+        }
+        if($request->image2==!null){
+            $post -> image2    = "storage/".$post->id."image2.jpeg";
+        }
+        if($request->image3==!null){
+            $post -> image3    = "storage/".$post->id."image3.jpeg";
+        }
+        if($request->image4==!null){
+            $post -> image4    = "storage/".$post->id."image4.jpeg";
+        }
+        
         
         $post -> save(); //保存してあげましょう
-        if(isset($post->image1)){
-
+        if($post->image1==!null){
             rename('storage/image1.jpeg', $post->image1);
+        }
+        if($post->image2==!null){
             rename('storage/image2.jpeg', $post->image2);
+        }
+        if($post->image3==!null){
             rename('storage/image3.jpeg', $post->image3);
+        }
+        if($post->image4==!null){
             rename('storage/image4.jpeg', $post->image4);
         }
-
-        
         return redirect()->route('posts.index');
     }
 
@@ -131,13 +139,13 @@ class PostController extends Controller
         $product_category=Product_category::all();
         $product_subcategory=Product_subcategory::all();
         $post = Post::find($id);
+        
         $post->load('comments');
         
                 
                 
             $comments=$post->comments;
             // ->paginate(5);
-            
             
             return view('posts.show', compact('post','comments','product_category','product_subcategory'));
     }
@@ -178,12 +186,22 @@ class PostController extends Controller
 
     public function confirm(PostRequest $request)
     {
+        // dd($request);
         $post = new Post; //インスタンスを作成
         $post -> name    = $request -> name; //ユーザー入力のnameを代入
-        $post -> image1    = $request -> image1; //ユーザー入力のimage1を代入
-        $post -> image2    = $request -> image2; //ユーザー入力のimage2を代入
-        $post -> image3    = $request -> image3; //ユーザー入力のimage3を代入
-        $post -> image4    = $request -> image4; //ユーザー入力のimage4を代入
+        if($request->image1==!null){
+            $post -> image1    = $request -> image1; //ユーザー入力のimage1を代入
+        }
+        if($request->image2==!null){
+            $post -> image2    = $request -> image2; //ユーザー入力のimage2を代入
+        }
+        if($request->image3==!null){
+            $post -> image3    = $request -> image3; //ユーザー入力のimage3を代入
+        }
+        if($request->image4==!null){
+            $post -> image4    = $request -> image4; //ユーザー入力のimage4を代入
+        }
+        
         $post -> product_category    = $request -> product_category; //ユーザー入力のnameを代入
         $post -> product_subcategory    = $request -> product_subcategory; //ユーザー入力のnameを代入
         $post -> product_content     = $request -> product_content; //ユーザー入力のproduct_contentを代入

@@ -36,12 +36,20 @@
             </div>
             
             <div class="card-body">
-                @isset($post->image1)
-                <img class="thumbnail" src="{{ url($post->image1) }}">
-                <img class="thumbnail" src="{{ url($post->image2) }}">
-                <img class="thumbnail" src="{{ url($post->image3) }}">
-                <img class="thumbnail" src="{{ url($post->image4) }}">
-                @endisset
+                @if($post->image1==!null)
+                <img class="thumbnail" src="/{{$post->image1}}">
+                @endif
+                @if($post->image2==!null)
+                <img class="thumbnail" src="/{{$post->image2}}">
+                @endif
+                @if($post->image3==!null)
+                <img class="thumbnail" src="/{{$post->image3}}">
+                @endif
+                @if($post->image4==!null)
+                <img class="thumbnail" src="/{{$post->image4}}">
+                @endif
+                
+                
                 <p class="card-text">■商品説明<br>{{ $post->product_content }}</p>
                 <p class="card-text">■商品レビュー<br>総合評価 @for($i = 0; $i < ceil($comments->where('post_id',$post->id)->avg('evaluation')); $i++)<div class="hidden">{{$i}}</div>★@endfor
                             {{ceil($comments->where('post_id',$post->id)->avg('evaluation'))}}</p>

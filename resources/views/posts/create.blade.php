@@ -72,12 +72,16 @@
 <div class="form-group">
           <label for="exampleFormControlSelect1">商品小カテゴリー</label>
           <div class="is-invalid">
+              @if(old('product_subcategory')==!null)
+              <input value="{{old('product_subcategory')}}" class="old" type="hidden" name="product_subcategory">
+              @endif
             <select class="form-control children" id="exampleFormControlSelect1" name="product_subcategory" class="is-invalid">
+                
                 
                 
                 @if(old('product_subcategory')==!null&&1<=old('product_subcategory')&&old('product_subcategory')<=25)
                 
-                <option value="{{old('product_subcategory')}}" selected>{{$product_subcategories->find(old('product_subcategory'))->name}}</option>
+                <option value="{{old('product_subcategory')}}" selected class="modori">{{$product_subcategories->find(old('product_subcategory'))->name}}</option>
                 
                 @else
                 <option value="" selected>選択してください</option>
@@ -87,16 +91,16 @@
             @endforeach
             
             
-            
-            </select>
-            @error('product_subcategory')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-          </div>
-        </div>
-                            
+        </select>
+        @error('product_subcategory')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+</div>
+
+<div id="test"></div>
                 
 
 
@@ -107,21 +111,27 @@
           <!-- サーバへ送信する内容を入力する。 -->
           
                             
-                            写真1：<input type="file" id="file1" name="file"  onchange="handleFileSelect1();"><br/>
+                            写真1：<input type="file" id="file1" name="file" accept="image/jpeg, image/png, image/jpg, image/gif" onchange="handleFileSelect1();"><br/>
+                            <button type="button" onclick="send1();">アップロード</button><div id="main1"></div>
+                            @if(old('image1')==!null)
+                            <img class="thumbnail" src="{{old('image1')}}">
+                            <input type="text" class="hidden" value="{{old('image1')}}" name="image1" type="hidden">
+                            @endif
+                            <br>
                             写真2：<input type="file" id="file2" name="file" accept="image/jpeg, image/png, image/jpg, image/gif" onchange="handleFileSelect2();"><br/>
+                            <button type="button" onclick="send2();">アップロード</button><div id="main2"></div><br>
                             写真3：<input type="file" id="file3" name="file" accept="image/jpeg, image/png, image/jpg, image/gif" onchange="handleFileSelect3();"><br/>
+                            <button type="button" onclick="send3();">アップロード</button><div id="main3"></div><br>
                             写真4：<input type="file" id="file4" name="file" accept="image/jpeg, image/png, image/jpg, image/gif" onchange="handleFileSelect4();"><br/>
-                            <button type="button" onclick="send();">アップロード</button>
+                            <button type="button" onclick="send4();">アップロード</button><div id="main4"></div><br>
                             
                             
 
                             <!-- JavaScripts -->
 
                         <!-- サーバから受けた内容を表示する。 -->
-                        <div id="main">
-                                </div>
-                        <div id="target">
-                                </div>
+                        <div id="main"></div>
+                        
 </div>
 
                         
@@ -150,5 +160,7 @@
                             
                             @endsection
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-                            <script src="{{ url('test.js') }}"></script>        
+                            
+                            <script src="{{ url('test.js') }}"></script>   
+                            
                         </body>
