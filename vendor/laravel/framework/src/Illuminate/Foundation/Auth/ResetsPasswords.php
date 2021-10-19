@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use App\Rules\Hankaku;
 
 trait ResetsPasswords
 {
@@ -24,6 +25,7 @@ trait ResetsPasswords
      */
     public function showResetForm(Request $request, $token = null)
     {
+        
         return view('auth.passwords.reset')->with(
             ['token' => $token, 'email' => $request->email]
         );
@@ -66,7 +68,8 @@ trait ResetsPasswords
         return [
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed|min:8',
+            // 'password' => 'required|confirmed|min:8',
+            'password' => ['required','string', 'min:8','max:20',new Hankaku, 'confirmed'],
         ];
     }
 

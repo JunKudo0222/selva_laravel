@@ -33,10 +33,12 @@ trait SendsPasswordResetEmails
         $response = $this->broker()->sendResetLink(
             $this->credentials($request)
         );
+        
 
         return $response == Password::RESET_LINK_SENT
                     ? $this->sendResetLinkResponse($request, $response)
                     : $this->sendResetLinkFailedResponse($request, $response);
+        
     }
 
     /**
@@ -70,7 +72,7 @@ trait SendsPasswordResetEmails
      */
     protected function sendResetLinkResponse(Request $request, $response)
     {
-        return back()->with('status', trans($response));
+        return view('auth.passwords.emailsent',['status' => 'パスワードリセットリンクを送信しました！']);
     }
 
     /**

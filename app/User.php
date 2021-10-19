@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Notifications\PasswordResetNotification;
 
 class User extends Authenticatable
 {
@@ -44,5 +45,16 @@ class User extends Authenticatable
     ];
 
     protected $dates = ['deleted_at'];
+
+
+    // * パスワードリセット通知の送信をオーバーライド
+    // *
+    // * @param  string  $token
+    // * @return void
+    // */
+   public function sendPasswordResetNotification($token)
+   {
+     $this->notify(new PasswordResetNotification($token));
+   }
 
 }

@@ -10,7 +10,7 @@
 退会しますか？
 <br>
 @auth
-<a href="/" class="btn btn-primary">マイページに戻る</a>
+<a href="{{route('users.show',Auth::id())}}" class="btn btn-primary">マイページに戻る</a>
 
 <form action="{{route('users.destroy',Auth::id())}}" class="right" method="POST">
     @csrf
