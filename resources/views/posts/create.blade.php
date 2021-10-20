@@ -119,11 +119,26 @@
                             @endif
                             <br>
                             写真2：<input type="file" id="file2" name="file" accept="image/jpeg, image/png, image/jpg, image/gif" onchange="handleFileSelect2();"><br/>
-                            <button type="button" onclick="send2();">アップロード</button><div id="main2"></div><br>
+                            <button type="button" onclick="send2();">アップロード</button><div id="main2"></div>
+                            @if(old('image2')==!null)
+                            <img class="thumbnail" src="{{old('image2')}}">
+                            <input type="text" class="hidden" value="{{old('image2')}}" name="image2" type="hidden">
+                            @endif
+                            <br>
                             写真3：<input type="file" id="file3" name="file" accept="image/jpeg, image/png, image/jpg, image/gif" onchange="handleFileSelect3();"><br/>
-                            <button type="button" onclick="send3();">アップロード</button><div id="main3"></div><br>
+                            <button type="button" onclick="send3();">アップロード</button><div id="main3"></div>
+                            @if(old('image3')==!null)
+                            <img class="thumbnail" src="{{old('image3')}}">
+                            <input type="text" class="hidden" value="{{old('image3')}}" name="image3" type="hidden">
+                            @endif
+                            <br>
                             写真4：<input type="file" id="file4" name="file" accept="image/jpeg, image/png, image/jpg, image/gif" onchange="handleFileSelect4();"><br/>
-                            <button type="button" onclick="send4();">アップロード</button><div id="main4"></div><br>
+                            <button type="button" onclick="send4();">アップロード</button><div id="main4"></div>
+                            @if(old('image4')==!null)
+                            <img class="thumbnail" src="{{old('image4')}}">
+                            <input type="text" class="hidden" value="{{old('image4')}}" name="image4" type="hidden">
+                            @endif
+                            <br>
                             
                             
 
