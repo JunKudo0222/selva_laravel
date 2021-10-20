@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('product_category');
             $table->unsignedBigInteger('product_subcategory');
             $table->string('name');
-            $table->string('product_content');
+            $table->string('product_content',500);
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('product_category')->references('id')->on('product_categories');
             $table->foreign('product_subcategory')->references('id')->on('product_subcategories');
