@@ -21,7 +21,7 @@ class PostController extends Controller
     {
         $product_categories=Product_category::all();
         $product_subcategories=Product_subcategory::all();
-        $posts=Post::all();
+        $posts=Post::orderBy('id','desc')->paginate(10)->onEachSide(1);
         $comments=Comment::all();
         return view('posts.index',compact('posts','comments','product_categories','product_subcategories'));
     }
@@ -243,7 +243,7 @@ class PostController extends Controller
             ->orWhere('product_content','like','%'.$request->search.'%');
         }
 
-         $posts = $query->get();
+         $posts = $query->get()->paginate(10)->onEachSide(1);
 
         $search_result = $request->search.'の検索結果'.$posts->count().'件';
 

@@ -143,6 +143,7 @@
 
             @foreach ($posts as $post)
                 <div class="card-body">
+                    
                     @isset($post->image1)
                     <img class="thumbnail" src="{{ url($post->image1) }}">
                     @endisset
@@ -169,9 +170,14 @@
 <div class="col-md-2 bottom-center">
                 <a href="/" class="btn btn-primary">トップに戻る</a>
     </div>
+    
+    <div class="mt-3">
+        {{ $posts->appends(request()->input())->links('vendor/pagination/pagination_view3') }}
+    </div>
 @endsection
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
                             
                             <script src="{{ url('test.js') }}"></script>   
                             
                         </body>
+                       
