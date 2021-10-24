@@ -35,6 +35,11 @@
         margin:auto;
         
     }
+    .text{
+        background:transparent;
+        border:none;
+    }
+    
 </style>
 @auth
 <div class="topbar">
@@ -152,12 +157,20 @@
 
                         
                             {{$product_categories->find($post->product_category)->name}}>{{$product_subcategories->find($post->product_subcategory)->name}}<br>
-                            {{ $post->name }}<br>
+                            
+                            <form action="{{ route('posts.show', $post->id) }}">
+                                <input type="hidden" name="page" value="{{$page}}">
+                                <button type="submit" class="text">{{$post->name}}</button>
+                            </form>
+                            <br>
                             @for($i = 0; $i < ceil($comments->where('post_id',$post->id)->avg('evaluation')); $i++)<div class="hidden">{{$i}}</div>★@endfor
                             {{ceil($comments->where('post_id',$post->id)->avg('evaluation'))}}
                             
                         
-                        <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">詳細</a>
+                            <form action="{{ route('posts.show', $post->id) }}">
+                                <input type="hidden" name="page" value="{{$page}}">
+                                <button type="submit" class="btn btn-primary">詳細</button>
+                            </form>
                     </h5>
 
                 </div>
@@ -167,13 +180,13 @@
         
     </div>
 </div>
+<div class="mt-3">
+    {{ $posts->appends(request()->input())->links('vendor/pagination/pagination_view3') }}
+</div>
 <div class="col-md-2 bottom-center">
                 <a href="/" class="btn btn-primary">トップに戻る</a>
     </div>
     
-    <div class="mt-3">
-        {{ $posts->appends(request()->input())->links('vendor/pagination/pagination_view3') }}
-    </div>
 @endsection
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
                             

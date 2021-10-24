@@ -17,13 +17,18 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        
+        $page=$request->input('page');
         $product_categories=Product_category::all();
         $product_subcategories=Product_subcategory::all();
-        $posts=Post::orderBy('id','desc')->paginate(10)->onEachSide(1);
+        $posts=Post::orderBy('id','desc')->paginate(2)->onEachSide(1);
         $comments=Comment::all();
-        return view('posts.index',compact('posts','comments','product_categories','product_subcategories'));
+        
+            return view('posts.index',compact('posts','comments','product_categories','product_subcategories','page'));
+        
+        
     }
 
     /**
@@ -140,8 +145,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Request $request)
     {
+        
+        $page=$request->page;
+
         $product_category=Product_category::all();
         $product_subcategory=Product_subcategory::all();
         $post = Post::find($id);
@@ -153,7 +161,7 @@ class PostController extends Controller
             $comments=$post->comments;
             // ->paginate(5);
             
-            return view('posts.show', compact('post','comments','product_category','product_subcategory'));
+            return view('posts.show', compact('post','comments','product_category','product_subcategory','page'));
     }
 
     /**

@@ -83,7 +83,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
         <a class="btn btn-primary" href="{{route('comments.create',['id'=>$post->id])}}">この商品についてのレビューを登録</a><br><br>
-        <a class="btn btn-primary" href="{{route('posts.index')}}">商品一覧に戻る</a>
+        <a class="btn btn-primary" href="{{route('posts.index',['page' => $page])}}">商品一覧に戻る</a>
         </div>
     </div>
     @endif
