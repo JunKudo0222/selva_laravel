@@ -108,7 +108,7 @@
                                         商品一覧
                                     </a>
                     @auth
-                                    <a  href="{{ route('posts.create') }}">
+                                    <a  href="{{ route('posts.create',['route'=>'route']) }}">
                                         新規商品登録
                                     </a>
                                     <a  href="{{ route('users.show',Auth::user()->id )}}">

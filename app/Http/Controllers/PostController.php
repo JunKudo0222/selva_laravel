@@ -19,11 +19,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $product_category=Product_category::all();
-        $product_subcategory=Product_subcategory::all();
+        $product_categories=Product_category::all();
+        $product_subcategories=Product_subcategory::all();
         $posts=Post::all();
         $comments=Comment::all();
-        return view('posts.index',compact('posts','comments','product_category','product_subcategory'));
+        return view('posts.index',compact('posts','comments','product_categories','product_subcategories'));
     }
 
     /**
@@ -31,12 +31,18 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        
         $product_categories=Product_category::all();
         $product_subcategories=Product_subcategory::all();
-        
-        return view('posts.create',compact('product_categories','product_subcategories'));
+        if($request->route==!null){
+            $top=$request->route;
+            return view('posts.create',compact('product_categories','product_subcategories','top'));
+        }
+        else{
+            return view('posts.create',compact('product_categories','product_subcategories'));
+        }
     }
 
     public function test(Request $request){
@@ -213,9 +219,25 @@ class PostController extends Controller
     }
 
     public function search(Request $request)
-    {                
+    {
+                        
         $query = Post::query();
+        $product_categories=Product_category::all();
+        $product_subcategories=Product_subcategory::all();
+        $comments=Comment::all();
 
+        if(isset($request->product_category)){
+            
+            $query->where('posts.product_category', $request->product_category);
+            
+            
+        }
+        if(isset($request->product_subcategory)){
+            
+            $query->where('posts.product_subcategory', $request->product_subcategory);
+            
+            
+        }
         if(isset($request->search)){
             $query->where('name','like','%'.$request->search.'%')
             ->orWhere('product_content','like','%'.$request->search.'%');
@@ -225,6 +247,6 @@ class PostController extends Controller
 
         $search_result = $request->search.'の検索結果'.$posts->count().'件';
 
-        return view('posts.index',compact('posts','search_result'));    
+        return view('posts.index',compact('posts','comments','search_result','product_categories','product_subcategories'));    
     }
 }

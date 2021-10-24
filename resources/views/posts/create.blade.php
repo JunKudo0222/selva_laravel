@@ -159,8 +159,12 @@
                     <textarea class="form-control"  rows="5" name="product_content" value="{{old('product_content')}}">{{ old('product_content') }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">確認画面へ</button><br><br>
-                <a href="/" class="btn btn-primary">{{ __('トップへ戻る') }}</a>
             </form>
+            @if(isset($top))
+            <a href="/" class="btn btn-primary">{{ __('トップへ戻る') }}</a>
+            @else
+            <a href="{{route('posts.index')}}" class="btn btn-primary">{{ __('商品一覧へ戻る') }}</a>
+            @endif
         </div>
     </div>
 </div>
