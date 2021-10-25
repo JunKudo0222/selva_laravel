@@ -7,7 +7,7 @@
 @extends('layouts.app')
 @section('content')
 <h1>退会</h1>
-退会しますか？
+退会します。よろしいですか？
 <br>
 @auth
 <a href="{{route('users.show',Auth::id())}}" class="btn btn-primary">マイページに戻る</a>

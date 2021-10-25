@@ -23,7 +23,7 @@ class PostController extends Controller
         $page=$request->input('page');
         $product_categories=Product_category::all();
         $product_subcategories=Product_subcategory::all();
-        $posts=Post::orderBy('id','desc')->paginate(2)->onEachSide(1);
+        $posts=Post::orderBy('id','desc')->paginate(10)->onEachSide(1);
         $comments=Comment::all();
         
             return view('posts.index',compact('posts','comments','product_categories','product_subcategories','page'));

@@ -70,6 +70,9 @@
             @endforeach
         </div>
     </div>
+    <div class="mt-3">
+{{ $comments->appends(request()->input())->links('vendor/pagination/pagination_view3') }}
+</div>
 
 
 

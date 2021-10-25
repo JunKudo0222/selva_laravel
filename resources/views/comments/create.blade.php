@@ -68,7 +68,15 @@
 
 
 
-    
+    @if ($errors->any()) 
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
 
     <div class="row justify-content-center">
@@ -85,22 +93,23 @@
                                 
                                 @if(old('evaluation')==!null&&1<=old('evaluation')&&old('evaluation')<=5)
                                 
-                                <option value="{{old('evaluation')}}" selected>{{$evaluation->find(old('evaluation'))->name}}</option>
+                                <option value="{{old('evaluation')}}" selected>{{(old('evaluation'))}}</option>
                                 
                                 @else
                                 <option value="" selected>選択してください</option>
                                 @endif
                              
-                            <option value="1" >1</option>
-                            <option value="2" >2</option>
-                            <option value="3" >3</option>
-                            <option value="4" >4</option>
-                            <option value="5" >5</option>
+                            <option value="1" type="number">1</option>
+                            <option value="2" type="number">2</option>
+                            <option value="3" type="number">3</option>
+                            <option value="4" type="number">4</option>
+                            <option value="5" type="number">5</option>
+                            
                             </select>
                           </div>
                     <label>商品コメント</label>
                     <textarea class="form-control" 
-                     placeholder="内容" rows="5" name="body" value="{{old('body')}}"></textarea>
+                     placeholder="内容" rows="5" name="body" value="{{old('body')}}">{{old('body')}}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">コメントする</button>
             </form>

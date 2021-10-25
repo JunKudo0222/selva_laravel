@@ -29,7 +29,7 @@ class CommentController extends Controller
         $user=User::all();
         $post=Post::find($request->id);
         $comments=$post->load('comments');
-        $comments=$comments['comments'];
+        $comments=$comments['comments']->paginate(5)->onEachSide(1);
         
         return view('comments.index',compact('comments','post','user'));
     }
@@ -42,9 +42,19 @@ class CommentController extends Controller
     public function create(Request $request)
     {
         
-        $id=(int)$request->id;
-        $post=Post::find($id);
-        return view('comments.create',compact('id','post'));
+        if($request->session()->get('_old_input')==!null){
+            $input=$request->session()->get('_old_input');
+            $id=$input['post_id'];
+            $post=Post::find($id);
+
+            return view('comments.create',compact('id','post'));
+        } 
+        else{
+
+            $id=(int)$request->id;
+            $post=Post::find($id);
+            return view('comments.create',compact('id','post'));
+        }
     }
 
     /**
@@ -56,8 +66,11 @@ class CommentController extends Controller
     public function store(CommentRequest $request)
     {
         
+        $post=Post::find($request->post_id);
+        $id=$request->post_id;
+        
         $request->session()->regenerateToken();
-        $input = $request->only('body','evaluation');
+        $input = $request->only('body','evaluation','post_id');
         $request->session()->put("form_input", $input);
         //セッションから値を取り出す
         $input = $request->session()->get("form_input");
@@ -66,7 +79,7 @@ class CommentController extends Controller
             // dd($request);
             
             
-            return redirect()->route('comments.create')->withInput($input);
+            return redirect()->route('comments.create',)->withInput($input);
         }
         $post = Post::find($request->post_id);  //まず該当の投稿を探す
         $comment = new Comment;              //commentのインスタンスを作成
@@ -190,6 +203,7 @@ class CommentController extends Controller
 
     public function confirm(CommentRequest $request)
     {   
+        
 
         
     
