@@ -59,7 +59,7 @@
         <form action="{{ route('users.edit',$user->id) }}" class="left">
         <button type="submit" class="btn btn-primary left" name="email">メールアドレス変更</button>
         </form>
-        <form action="{{ route('users.edit',$user->id) }}" class="left">
+        <form action="{{ route('users.editreview',$user->id) }}" class="left">
         <button type="submit" class="btn btn-primary left" name="review">商品レビュー管理</button>
         </form>
         <a href="{{route('users.delete_confirm')}}" class="btn btn-danger right">退会</a>

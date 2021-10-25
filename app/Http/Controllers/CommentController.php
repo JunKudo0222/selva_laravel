@@ -79,7 +79,7 @@ class CommentController extends Controller
             // dd($request);
             
             
-            return redirect()->route('comments.create',)->withInput($input);
+            return redirect()->route('comments.create')->withInput($input);
         }
         $post = Post::find($request->post_id);  //まず該当の投稿を探す
         $comment = new Comment;              //commentのインスタンスを作成
@@ -158,7 +158,7 @@ class CommentController extends Controller
         $comment->save();
         $user=Auth::user();
         $comments=$user->load('comments');
-        $comments=$comments['comments'];
+        $comments=$comments['comments']->paginate(5)->onEachSide(1);
         $posts=Post::all();
         $product_categories=Product_category::all();
         $product_subcategories=Product_subcategory::all();
@@ -175,8 +175,10 @@ class CommentController extends Controller
     {
         
         $comment=Comment::find($id);
-        
-        return view('users.deletereview',compact('comment'));
+        $post=Post::find($comment->post_id);
+        $comments=$post->load('comments');
+        $comments=$comments['comments'];
+        return view('users.deletereview',compact('comment','post','comments'));
     }
 
     public function destroy($id)
@@ -195,7 +197,7 @@ class CommentController extends Controller
         $product_categories=Product_category::all();
         $product_subcategories=Product_subcategory::all();
         $comments=$user->load('comments');
-            $comments=$comments['comments'];
+            $comments=$comments['comments']->paginate(5)->onEachSide(1);
             
 
             return view('users.editreview', compact('user','comments','posts','product_categories','product_subcategories'));

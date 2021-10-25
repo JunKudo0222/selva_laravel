@@ -64,6 +64,9 @@ Route::get('/users/{user_id}', 'UsersController@show')->name('users.show');
 // 編集
 Route::get('/edit/{user_id}', 'UsersController@edit')->name('users.edit');
 Route::post('/edit/{user_id}', 'UsersController@post')->name('users.post');
+//レビュー編集
+Route::get('/editreview/{user_id}', 'UsersController@editreview')->name('users.editreview');
+
 // 更新
 Route::put('/{id}', 'UsersController@update')->name('users.update');
 // 削除

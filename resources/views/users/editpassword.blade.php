@@ -48,6 +48,7 @@
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('パスワード') }}</label>
                             
+                            <input type="hidden"  name="password1" value="password1">
                             <div class="col-md-6">
                                 @if(old('password')==!null)
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{old('password')}}"  autocomplete="new-password">

@@ -79,10 +79,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request)
     {
         
-        $user = User::find($id);
+        $user = Auth::user();
         $posts=Post::all();
         $product_categories=Product_category::all();
         $product_subcategories=Product_subcategory::all();
@@ -94,17 +94,22 @@ class UsersController extends Controller
         elseif($request->has("email")){
             return view('users.editemail', compact('user'));
         }
-        elseif($request->has("review")){
-            $comments=$user->load('comments');
-            $comments=$comments['comments'];
-            
-
-            return view('users.editreview', compact('user','comments','posts','product_categories','product_subcategories'));
-        }
         else{
 
             return view('users.edit', compact('user'));
         }
+    }
+
+    public function editreview($id)
+    {
+        $user = Auth::user();
+        $posts=Post::all();
+        $product_categories=Product_category::all();
+        $product_subcategories=Product_subcategory::all();
+        $comments=$user->load('comments');
+            $comments=$comments['comments']->paginate(5)->onEachSide(1);
+  
+            return view('users.editreview', compact('user','comments','posts','product_categories','product_subcategories'));
     }
 
     /**
@@ -238,11 +243,13 @@ class UsersController extends Controller
 
     protected function validator(array $data)
     {
-        if(isset($data['password'])){
+        
+        if(isset($data['password1'])){
+            
 
             return Validator::make($data, [
                 
-                'password' => ['nullable','string', 'min:8','max:20',new Hankaku, 'confirmed'],
+                'password' => ['required','string', 'min:8','max:20',new Hankaku, 'confirmed'],
                 
             ]);
         }
@@ -257,7 +264,7 @@ class UsersController extends Controller
                 'name_sei' => ['required', 'string', 'max:20'],
                 'name_mei' => ['required', 'string', 'max:20'],
                 'gender_id' => ['required',new Gender],
-                'nickname' => ['required', 'string', 'max:20'],
+                'nickname' => ['required', 'string', 'max:10'],
             
             ]);
         }

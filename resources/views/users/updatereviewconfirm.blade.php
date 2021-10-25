@@ -84,9 +84,7 @@
     
     @if( Auth::check() )
     <div class="row justify-content-center">
-        <div class="col-md-8">
-        <a class="btn btn-primary" href="{{route('posts.show',$post->id)}}">商品詳細に戻る</a>
-        </div>
+        
     </div>
     @endif
 </div>

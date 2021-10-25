@@ -126,7 +126,7 @@
     @if( Auth::check() )
     <div class="row justify-content-center">
         <div class="col-md-8">
-        <a class="btn btn-primary" href="{{route('posts.show',$post->id)}}">レビュー管理に戻る</a>
+        <a class="btn btn-primary" href="{{route('users.editreview',Auth::id())}}">レビュー管理に戻る</a>
         </div>
     </div>
     @endif
