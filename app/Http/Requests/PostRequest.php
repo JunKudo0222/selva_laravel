@@ -26,8 +26,8 @@ class PostRequest extends FormRequest
         return [
             'name'=>'required|max:100',
             'product_content'=>'required|max:500',
-            'product_category'=>'required|between:1,5',
-            'product_subcategory'=>'required|between:1,25',
+            'product_category'=>'numeric|required|between:1,5',
+            'product_subcategory'=>'numeric|required|between:1,25',
             
         ];
     }

@@ -60,6 +60,7 @@
             
             
             
+            
             </select>
             @error('product_category')
                     <span class="invalid-feedback" role="alert">
@@ -89,6 +90,7 @@
              @foreach($product_subcategories as $product_subcategory)
             <option value="{{ $product_subcategory -> id }}" data-val="{{$product_subcategory->product_categories_id}}" class="@error('product_subcategory') is-invalid @enderror">{{ $product_subcategory -> name }}</option>
             @endforeach
+            
             
             
         </select>
