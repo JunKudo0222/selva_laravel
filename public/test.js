@@ -356,6 +356,10 @@ return true;
 }
 
 
+$('#button1').attr('disabled', true);
+$('#button2').attr('disabled', true);
+$('#button3').attr('disabled', true);
+$('#button4').attr('disabled', true);
 $('#main1').on('DOMSubtreeModified propertychange',function(){
     $('#button1').attr('disabled', true);
     

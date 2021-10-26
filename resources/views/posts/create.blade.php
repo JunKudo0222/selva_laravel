@@ -112,11 +112,11 @@
           
                             
                             写真1：<input type="file" id="file1" name="file" accept="image/jpeg, image/png, image/jpg, image/gif" onchange="handleFileSelect1();"><br/>
-                            <button type="button" onclick="send1();" id="button1">アップロード</button><div id="main1"></div>
-                            @if(old('image1')==!null)
-                            <img class="thumbnail" src="{{old('image1')}}">
-                            <input type="text" class="hidden" value="{{old('image1')}}" name="image1" type="hidden">
-                            @endif
+                            <button type="button" onclick="send1();" id="button1">アップロード</button><div id="main1">@if(old('image1')==!null)
+                            <img class="thumbnail" src="{{old('image1')}}" >
+                            <input type="text" class="hidden" value="{{old('image1')}}" name="image1" type="hidden" >
+                            @endif</div>
+                            
                             <br>
                             写真2：<input type="file" id="file2" name="file" accept="image/jpeg, image/png, image/jpg, image/gif" onchange="handleFileSelect2();"><br/>
                             <button type="button" onclick="send2();" id="button2">アップロード</button><div id="main2"></div>
