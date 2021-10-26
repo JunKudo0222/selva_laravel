@@ -135,7 +135,7 @@ class ManageUserController extends Controller
                 'name_sei' => ['required', 'string', 'max:20'],
                 'name_mei' => ['required', 'string', 'max:20'],
                 'gender_id' => ['required',new Gender],
-                'nickname' => ['nullable','string','max:100' ],
+                'nickname' => ['nullable','string','max:10' ],
                 'password' => ['nullable','string', 'min:8','max:20',new Hankaku, 'confirmed'],
                 
                 
@@ -147,7 +147,7 @@ class ManageUserController extends Controller
             'name_sei' => ['required', 'string', 'max:20'],
             'name_mei' => ['required', 'string', 'max:20'],
             'gender_id' => ['required',new Gender],
-            'nickname' => ['nullable','string','max:100' ],
+            'nickname' => ['nullable','string','max:10' ],
             'password' => ['nullable','string', 'min:8','max:20',new Hankaku, 'confirmed'],
             // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'email' => 'required|string|email|max:200|unique:users,email,NULL,id,deleted_at,NULL',
@@ -158,7 +158,7 @@ class ManageUserController extends Controller
                 'name_sei' => ['required', 'string', 'max:20'],
                 'name_mei' => ['required', 'string', 'max:20'],
                 'gender_id' => ['required',new Gender],
-                'nickname' => ['nullable','string','max:100' ],
+                'nickname' => ['nullable','string','max:10' ],
                 'password' => ['required','string', 'min:8','max:20',new Hankaku, 'confirmed'],
                 // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'email' => 'required|string|email|max:200|unique:users,email,NULL,id,deleted_at,NULL',
