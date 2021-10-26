@@ -26,6 +26,7 @@ function send1(){
         
         //成功の場合、以下を行う。
         success: function(data){
+            $("#main1").empty();
             $("#main1").append(data);
         },
         
@@ -65,6 +66,7 @@ function send2(){
         
         //成功の場合、以下を行う。
         success: function(data){
+            $("#main2").empty();
             $("#main2").append(data);
         },
         
@@ -106,6 +108,7 @@ function send3(){
         
         //成功の場合、以下を行う。
         success: function(data){
+            $("#main3").empty();
             $("#main3").append(data);
         },
         
@@ -145,6 +148,7 @@ function send4(){
         
         //成功の場合、以下を行う。
         success: function(data){
+            $("#main4").empty();
             $("#main4").append(data);
         },
         
@@ -263,6 +267,7 @@ function handleFileSelect1(){
         }
     }
         
+    $('#button1').attr('disabled', false);
 //チェックを通ったらtrueを返す
 return true;
 }
@@ -301,6 +306,9 @@ function handleFileSelect2(){
         return false;
     }
   }
+  $('#button2').attr('disabled', false);
+//チェックを通ったらtrueを返す
+return true;
 }
 // changeイベントで呼び出す関数
 function handleFileSelect3(){
@@ -320,6 +328,9 @@ function handleFileSelect3(){
         return false;
     }
   }
+  $('#button3').attr('disabled', false);
+//チェックを通ったらtrueを返す
+return true;
 }
 // changeイベントで呼び出す関数
 function handleFileSelect4(){
@@ -339,4 +350,29 @@ function handleFileSelect4(){
         return false;
     }
   }
+  $('#button4').attr('disabled', false);
+//チェックを通ったらtrueを返す
+return true;
 }
+
+
+$('#main1').on('DOMSubtreeModified propertychange',function(){
+    $('#button1').attr('disabled', true);
+    
+}
+)
+$('#main2').on('DOMSubtreeModified propertychange',function(){
+    $('#button2').attr('disabled', true);
+    
+}
+)
+$('#main3').on('DOMSubtreeModified propertychange',function(){
+    $('#button3').attr('disabled', true);
+    
+}
+)
+$('#main4').on('DOMSubtreeModified propertychange',function(){
+    $('#button4').attr('disabled', true);
+    
+}
+)
