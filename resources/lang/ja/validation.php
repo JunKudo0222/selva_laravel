@@ -94,7 +94,7 @@ return [
     ],
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
-    'numeric' => 'The :attribute must be a number.',
+    'numeric' => '選択肢から選択して下さい',
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => ':attribute は半角英数字で入力して下さい',
