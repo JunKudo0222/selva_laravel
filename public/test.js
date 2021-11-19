@@ -10,9 +10,12 @@ function send1(){
     });
     //アップロードファイルの入力値を取得する。
     var fileData1 = document.getElementById("file1").files[0];
- 
+    
     //フォームデータを作成する。(送信するデータ)
     var form = new FormData();
+    //画像キャッシュの削除(画像URLにユニークなクエリを付与)
+    var timestamp = new Date().getTime();
+
     //フォームデータにテキストの内容、アップロードファイルの内容を格納する。
     form.append( "file1", fileData1 );
     //ポスト送信する。
@@ -28,14 +31,15 @@ function send1(){
         success: function(data){
             $("#main1").empty();
             $("#main1").append(data);
+            $('#image1').attr('src', $('#image1').attr('src')+'?'+timestamp);
         },
         
         //失敗の場合、以下を行う。
         error : function(){
             alert('失敗です。');
             console.log("XMLHttpRequest : " + XMLHttpRequest.status);
-　　console.log("textStatus     : " + textStatus);
-　　console.log("errorThrown    : " + errorThrown.message);
+            console.log("textStatus     : " + textStatus);
+            console.log("errorThrown    : " + errorThrown.message);
         }
     });
 }
@@ -51,6 +55,9 @@ function send2(){
     
     //フォームデータを作成する。(送信するデータ)
     var form = new FormData();
+    //画像キャッシュの削除(画像URLにユニークなクエリを付与)
+    var timestamp = new Date().getTime();
+
     //フォームデータにテキストの内容、アップロードファイルの内容を格納する。
     
     form.append( "file2", fileData2 );
@@ -68,6 +75,7 @@ function send2(){
         success: function(data){
             $("#main2").empty();
             $("#main2").append(data);
+            $('#image2').attr('src', $('#image2').attr('src')+'?'+timestamp);
         },
         
         //失敗の場合、以下を行う。
@@ -93,6 +101,9 @@ function send3(){
  
     //フォームデータを作成する。(送信するデータ)
     var form = new FormData();
+    //画像キャッシュの削除(画像URLにユニークなクエリを付与)
+    var timestamp = new Date().getTime();
+
     //フォームデータにテキストの内容、アップロードファイルの内容を格納する。
     
     form.append( "file3", fileData3 );
@@ -110,6 +121,7 @@ function send3(){
         success: function(data){
             $("#main3").empty();
             $("#main3").append(data);
+            $('#image3').attr('src', $('#image3').attr('src')+'?'+timestamp);
         },
         
         //失敗の場合、以下を行う。
@@ -134,6 +146,9 @@ function send4(){
  
     //フォームデータを作成する。(送信するデータ)
     var form = new FormData();
+    //画像キャッシュの削除(画像URLにユニークなクエリを付与)
+    var timestamp = new Date().getTime();
+
     //フォームデータにテキストの内容、アップロードファイルの内容を格納する。
     
     form.append( "file4", fileData4 );
@@ -150,6 +165,7 @@ function send4(){
         success: function(data){
             $("#main4").empty();
             $("#main4").append(data);
+            $('#image4').attr('src', $('#image4').attr('src')+'?'+timestamp);
         },
         
         //失敗の場合、以下を行う。

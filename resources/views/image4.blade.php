@@ -10,7 +10,7 @@
 
 写真4
 <br>
-<img class="thumbnail" src="{{ url('storage/image4.jpeg') }}">
+<img class="thumbnail" src="{{ url('storage/image4.jpeg') }}" id="image4">
 
 <input type="text" class="form-control hidden" value="storage/image4.jpeg" name="image4" type="hidden">
 <br>
