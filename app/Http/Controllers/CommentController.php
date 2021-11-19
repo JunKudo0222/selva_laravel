@@ -26,12 +26,14 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
+        $product_category=Product_category::all();
+        $product_subcategory=Product_subcategory::all();
         $user=User::all();
         $post=Post::find($request->id);
         $comments=$post->load('comments');
         $comments=$comments['comments']->paginate(5)->onEachSide(1);
         
-        return view('comments.index',compact('comments','post','user'));
+        return view('comments.index',compact('comments','post','user','product_category','product_subcategory'));
     }
 
     /**
@@ -90,10 +92,11 @@ class CommentController extends Controller
         $comment -> save();
         $comments=$post->comments;
         $id=$post->id;
+        return view('comments.complete',compact('id'));
 
-        return redirect()->route('posts.show',[
-            'post_id' => $id,
-        ]);
+        // return redirect()->route('posts.show',[
+        //     'post_id' => $id,
+        // ]);
         // return view('posts.show', compact('post','comments'));  //リターン先は該当の投稿詳細ページ
     }
 
