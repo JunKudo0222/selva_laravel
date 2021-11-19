@@ -159,7 +159,9 @@
                             {{$product_categories->find($post->product_category)->name}}>{{$product_subcategories->find($post->product_subcategory)->name}}<br>
                             
                             <form action="{{ route('posts.show', $post->id) }}">
+                                @if(isset($page))
                                 <input type="hidden" name="page" value="{{$page}}">
+                                @endif
                                 <button type="submit" class="text">{{$post->name}}</button>
                             </form>
                             <br>
@@ -168,7 +170,9 @@
                             
                         
                             <form action="{{ route('posts.show', $post->id) }}">
+                                @if(isset($page))
                                 <input type="hidden" name="page" value="{{$page}}">
+                                @endif
                                 <button type="submit" class="btn btn-primary">詳細</button>
                             </form>
                     </h5>

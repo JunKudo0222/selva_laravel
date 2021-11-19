@@ -3088,6 +3088,7 @@ return array(
     'PhpParser\\Parser\\Tokens' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Parser/Tokens.php',
     'PhpParser\\PrettyPrinterAbstract' => $vendorDir . '/nikic/php-parser/lib/PhpParser/PrettyPrinterAbstract.php',
     'PhpParser\\PrettyPrinter\\Standard' => $vendorDir . '/nikic/php-parser/lib/PhpParser/PrettyPrinter/Standard.php',
+    'PostsTableSeeder' => $baseDir . '/database/seeds/PostsTableSeeder.php',
     'Product_categoriesTableSeeder' => $baseDir . '/database/seeds/Product_categoriesTableSeeder.php',
     'Product_subcategoriesTableSeeder' => $baseDir . '/database/seeds/Product_subcategoriesTableSeeder.php',
     'Prophecy\\Argument' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument.php',
