@@ -143,7 +143,8 @@ class UsersController extends Controller
         }
         elseif($request->has("auth_code")){
             $user=Auth::user();
-            if($request->auth_code==$user->auth_code){
+            
+            if(strval($request->auth_code)===strval($user->auth_code)){
                 $input = $request->session()->get("newemail");
                 $user->email=$input;
                 $user->save();

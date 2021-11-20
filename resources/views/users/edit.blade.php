@@ -103,12 +103,16 @@
                         @elseif(old('gender_id')==2)
                         <input type="radio" name="gender_id" value=1> 男性
                         <input type="radio" name="gender_id" value=2 checked> 女性
+                        @else
+                        <input type="radio" name="gender_id" value=1> 男性
+                        <input type="radio" name="gender_id" value=2> 女性
                         @endif
                         @else
+
                         @if($user->gender_id==1)
                         <input type="radio" name="gender_id" value=1 checked> 男性
                         <input type="radio" name="gender_id" value=2> 女性
-                        @else
+                        @elseif($user->gender_id==2)
                         <input type="radio" name="gender_id" value=1> 男性
                         <input type="radio" name="gender_id" value=2 checked> 女性
                         @endif
