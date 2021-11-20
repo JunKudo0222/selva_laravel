@@ -91,13 +91,16 @@
                     <div class="is-invalid">
                             <select class="form-control" id="exampleFormControlSelect1" name="evaluation" class="is-invalid">
                                 
-                                
+                                @if(old('evaluation')==!null)
+                                <option value="{{old('evaluation')}}" selected>{{old('evaluation')}}</option>
+                                @else
                                 @if($comment->evaluation==!null&&1<=$comment->evaluation&&old('evaluation')<=5)
                                 
                                 <option value="{{$comment->evaluation}}" selected>{{$comment->evaluation}}</option>
                                 
                                 @else
                                 <option value="" selected>選択してください</option>
+                                @endif
                                 @endif
                              
                             <option value="1" >1</option>
@@ -108,8 +111,11 @@
                             </select>
                           </div>
                     <label>商品コメント</label>
-                    <textarea class="form-control" 
-                      rows="5" name="body" value="{{$comment->body}}">{{$comment->body}}</textarea>
+                    @if(old('body')==!null)
+                    <textarea class="form-control" rows="5" name="body" value="{{old('body')}}">{{old('body')}}</textarea>
+                    @else
+                    <textarea class="form-control" rows="5" name="body" value="{{$comment->body}}">{{$comment->body}}</textarea>
+                    @endif
                 </div>
                 <button type="submit" class="btn btn-primary">商品レビュー編集確認</button>
             </form>

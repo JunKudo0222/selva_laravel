@@ -1,5 +1,10 @@
-@extends('layouts.app')
+
 <style>
+    .topbutton{
+        float:right;
+        width:20%;
+
+    }
     .hidden{
         display:none;
     }
@@ -9,7 +14,12 @@
     }
     </style>
 
+@extends('layouts.app')
 @section('content')
+<div class="topbutton">
+    <a class="btn btn-primary" href="/">トップに戻る</a>
+</div>
+<h1>商品レビュー削除確認</h1>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
