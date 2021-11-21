@@ -159,6 +159,7 @@ return [
         'gender_id'=>'性別',
         'product_category'=>'商品大カテゴリー',
         'product_subcategory'=>'商品小カテゴリー',
+        'user_id'=>'ID',
     ],
 
 ];

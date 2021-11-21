@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Rules\Hankaku;
 
 class AdminLoginController extends Controller
 {
@@ -24,6 +26,7 @@ class AdminLoginController extends Controller
             
 			return redirect()->route('admin.top');
 		}
+		$this->validator($request->all())->validate();
 		$input = $request->only($this->formItems);
 		//ログイン失敗
 		return redirect()->route('admin.login')->withErrors([
@@ -31,4 +34,15 @@ class AdminLoginController extends Controller
 		])->withInput($input);
 		
 	}
+
+	protected function validator(array $data)
+    {
+        return Validator::make($data, [
+        
+        'user_id' => ['required','max:10'],
+        'password' => ['required','string', 'min:8','max:20',new Hankaku],
+        
+        ]);
+        
+    }
 }
