@@ -31,9 +31,14 @@ class CommentController extends Controller
         $user=User::all();
         $post=Post::find($request->id);
         $comments=$post->load('comments');
+        $evaluations=$comments->toArray();
+        $evaluations=$evaluations['comments'];
+        $evaluations=array_column($evaluations,'evaluation');
+        $evaluations=ceil(array_sum($evaluations)/count($evaluations));
         $comments=$comments['comments']->paginate(5)->onEachSide(1);
         
-        return view('comments.index',compact('comments','post','user','product_category','product_subcategory'));
+        
+        return view('comments.index',compact('comments','post','user','product_category','product_subcategory','evaluations'));
     }
 
     /**
