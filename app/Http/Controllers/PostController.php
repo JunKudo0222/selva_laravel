@@ -251,7 +251,7 @@ class PostController extends Controller
             ->orWhere('product_content','like','%'.$request->search.'%');
         }
 
-         $posts = $query->get()->paginate(10)->onEachSide(1);
+         $posts = $query->get()->sortByDesc('id')->paginate(10)->onEachSide(1);
 
         $search_result = $request->search.'の検索結果'.$posts->count().'件';
 

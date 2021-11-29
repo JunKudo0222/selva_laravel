@@ -210,7 +210,7 @@ function send4(){
         
         $.ajax({
             type: 'get',
-            url: '/create',
+            url: '/posts',
             // url: '/test',
             data: form,
             processData : false,

@@ -55,6 +55,7 @@ class ManageUserController extends Controller
         // dd($request->gender_id);
         if(isset($request->id)){
             $query->where('users.id',$request->id);
+            
 
         }
         
@@ -78,7 +79,7 @@ class ManageUserController extends Controller
         // dd(User::query()->get());
         
         
-        $user_list = $query->get()->paginate(10)->onEachSide(1);
+        $user_list = $query->get()->sortByDesc('id')->paginate(10)->onEachSide(1);
         // dd($user_list);
 
         $search_result = $request->search.'の検索結果'.$query->get()->count().'件';
