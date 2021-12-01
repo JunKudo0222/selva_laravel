@@ -53,6 +53,12 @@ class ManageUserController extends Controller
         
         $query = User::query();
         // dd($request->gender_id);
+        if(isset($request->search)){
+            $query->where('name_sei','like','%'.$request->search.'%')
+            ->orWhere('name_mei','like','%'.$request->search.'%')
+            ->orWhere('email','like','%'.$request->search.'%');
+            
+        }
         if(isset($request->id)){
             $query->where('users.id',$request->id);
             
@@ -69,13 +75,7 @@ class ManageUserController extends Controller
             $query->where('users.gender_id', 2);
             
         }
-        
-        if(isset($request->search)){
-            $query->where('name_sei','like','%'.$request->search.'%')
-            ->orWhere('name_mei','like','%'.$request->search.'%')
-            ->orWhere('email','like','%'.$request->search.'%');
-            
-        }
+        // dd($query);
         // dd(User::query()->get());
         
         

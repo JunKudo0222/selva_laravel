@@ -259,18 +259,21 @@
                         </div>
 
                         <p>性別<br>
-                        @if(old('gender_id')==!null)
                         @if(old('gender_id')==1)
                         <input type="radio" name="gender_id" value=1 checked> 男性
                         <input type="radio" name="gender_id" value=2> 女性
                         @elseif(old('gender_id')==2)
                         <input type="radio" name="gender_id" value=1> 男性
                         <input type="radio" name="gender_id" value=2 checked> 女性
-                        @endif
                         @else
-                        <input type="radio" name="gender_id" value=1> 男性
-                        <input type="radio" name="gender_id" value=2> 女性
+                        <input type="radio" name="gender_id" value=1 class="@error('gender_id') is-invalid @enderror"> 男性
+                        <input type="radio" name="gender_id" value=2 class="@error('gender_id') is-invalid @enderror"> 女性
                         @endif
+                        @error('gender_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </p>
 
 
@@ -292,7 +295,7 @@
                             <label for="nickname" class="col-md-4 col-form-label text-md-right">{{ __('ニックネーム') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nickname" type="text" class="form-control" name="nickname" value="{{old('nickname')}}"  autocomplete="nickname">
+                                <input id="nickname" type="text" class="form-control" name="nickname" value="{{old('nickname')}}"  autocomplete="nickname" required>
                                 @error('nickname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
