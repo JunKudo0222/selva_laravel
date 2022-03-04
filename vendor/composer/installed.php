@@ -5,11 +5,20 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'd419fe57699ee3634fba8271a49012a4c5b52313',
+        'reference' => '6278291ec985ea87a22b3578529be4b8c2cd3087',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
     'versions' => array(
+        'barryvdh/laravel-debugbar' => array(
+            'pretty_version' => 'v3.6.5',
+            'version' => '3.6.5.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../barryvdh/laravel-debugbar',
+            'aliases' => array(),
+            'reference' => 'ccf109f8755dcc7e58779d1aeb1051b04e0b4bef',
+            'dev_requirement' => false,
+        ),
         'cordoval/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -358,7 +367,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'd419fe57699ee3634fba8271a49012a4c5b52313',
+            'reference' => '6278291ec985ea87a22b3578529be4b8c2cd3087',
             'dev_requirement' => false,
         ),
         'laravel/tinker' => array(
@@ -404,6 +413,15 @@
             'install_path' => __DIR__ . '/../league/mime-type-detection',
             'aliases' => array(),
             'reference' => 'b38b25d7b372e9fddb00335400467b223349fd7e',
+            'dev_requirement' => false,
+        ),
+        'maximebf/debugbar' => array(
+            'pretty_version' => 'v1.17.3',
+            'version' => '1.17.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../maximebf/debugbar',
+            'aliases' => array(),
+            'reference' => 'e8ac3499af0ea5b440908e06cc0abe5898008b3c',
             'dev_requirement' => false,
         ),
         'mockery/mockery' => array(
