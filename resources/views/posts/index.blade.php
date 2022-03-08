@@ -128,7 +128,13 @@
                             </div>
                             <br>
                             <br>
-  					<input type="search" name="search" placeholder="キーワードを入力"><br>
+                            <input type="search" name="search" placeholder="キーワードを入力"><br>
+
+                           @include('posts.income')
+                            
+                            
+
+
   					<input type="submit"  value="商品検索">
 				</form>
 				@isset($search_result)
@@ -194,7 +200,7 @@
 @endsection
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
                             
-                            <script src="{{ url('test.js') }}"></script>   
+                           
                             
                         </body>
                        
