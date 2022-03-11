@@ -1,4 +1,9 @@
-                     
+<style>
+.income{
+    background-color:white;
+}
+</style>                     
+<div class="income">
                             <input id="income_type" class="income_type" type="radio" name="income_type" value="1" onclick="income();"> 年収
                             <input id="income_type" class="income_type" type="radio" name="income_type" value="2" onclick="income();"> 月収
                             <input id="income_type" class="income_type" type="radio" name="income_type" value="3" onclick="income();"> 日給
@@ -96,5 +101,5 @@
                             
                             <br>
 
-
+</div>
     <script src="{{ asset('income.js') }}" defer></script>

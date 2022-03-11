@@ -30,6 +30,17 @@ class PostController extends Controller
         
         
     }
+    public function ajaxtest(Request $request)
+    {
+        
+        $product_categories=Product_category::all();
+        $product_subcategories=Product_subcategory::all();
+        
+        
+            return 'a';
+        
+        
+    }
 
     /**
      * Show the form for creating a new resource.

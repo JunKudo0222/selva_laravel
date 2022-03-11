@@ -35,7 +35,7 @@ function income(){
   $.ajax({
       type: 'get',
       url: '/posts',
-      // url: '/test',
+     
       data: form,
       processData : false,
       contentType : false,
@@ -111,7 +111,7 @@ function jougen(){
  $.ajax({
      type: 'get',
      url: '/posts',
-     // url: '/test',
+    
      data: form,
      processData : false,
      contentType : false,
@@ -183,7 +183,7 @@ function kagen(){
  $.ajax({
      type: 'get',
      url: '/posts',
-     // url: '/test',
+    
      data: form,
      processData : false,
      contentType : false,

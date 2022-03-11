@@ -210,15 +210,12 @@ function send4(){
         
         $.ajax({
             type: 'get',
-            url: '/posts',
-            // url: '/test',
-            data: form,
+            url: '/ajaxtest',
             processData : false,
             contentType : false,
             
             //成功の場合、以下を行う。
-            success: function(data){
-                
+            success: function(){
                 //選択された地方のvalueを取得し変数に入れる
                 var val1 = $('.parent').val();
                 

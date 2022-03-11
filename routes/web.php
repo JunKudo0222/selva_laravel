@@ -86,6 +86,8 @@ Route::group(['middleware' => 'auth'], function() {
 // 一覧
 Route::get('/posts', 'PostController@index')->name('posts.index');
 // 保存
+Route::get('/ajaxtest', 'PostController@ajaxtest')->name('posts.ajaxtest');
+//ajax
 Route::post('/posts', 'PostController@store')->name('posts.store');
 // 作成
 Route::get('/posts/{post_id}', 'PostController@show')->name('posts.show');
